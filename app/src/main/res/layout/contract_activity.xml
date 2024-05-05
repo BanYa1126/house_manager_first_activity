@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="top">
+
+    <include
+        android:id="@+id/headerAdmin"
+        layout="@layout/activity_admin" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="세대번호를 입력해주세요."
+            android:inputType="text" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="계약시작일을 입력해주세요."
+            android:inputType="text"
+            android:layout_marginTop="20dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="계약종료일을 입력해주세요."
+            android:inputType="text"
+            android:layout_marginTop="5dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="입실일을 입력해주세요."
+            android:inputType="text"
+            android:layout_marginTop="20dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="퇴실일을 입력해주세요."
+            android:inputType="text"
+            android:layout_marginTop="5dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="계약 임대료를 입력해주세요."
+            android:inputType="text"
+            android:layout_marginTop="20dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="계약 보증금를 입력해주세요."
+            android:inputType="text"
+            android:layout_marginTop="20dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="계약금를 입력해주세요."
+            android:inputType="text"
+            android:layout_marginTop="20dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="잔금을 입력해주세요."
+            android:inputType="text"
+            android:layout_marginTop="20dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="특약사항을 입력해주세요."
+            android:inputType="text"
+            android:layout_marginTop="20dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="계약서 사본을 입력해주세요.(File)"
+            android:inputType="text"
+            android:layout_marginTop="20dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="비고를 입력해주세요."
+            android:inputType="text"
+            android:layout_marginTop="20dp"/>
+    </LinearLayout>
+    </ScrollView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <Button
+                android:id="@+id/CIButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="계약정보 등록"
+                android:textSize="20sp" />
+    </LinearLayout>
+</LinearLayout>

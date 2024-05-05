@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="top">
+
+    <include
+        android:id="@+id/headerAdmin"
+        layout="@layout/activity_admin" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="top"
+        android:orientation="vertical"
+        android:padding="20dp">
+        <Button
+            android:id="@+id/houseCButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="계약정보 관리"
+            android:textSize="20sp"/>
+
+        <Button
+            android:id="@+id/personButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="임차인정보 등록"
+            android:textSize="20sp"
+            android:layout_marginTop="40dp"/>
+
+        <Button
+            android:id="@+id/registrationButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="회원정보 관리"
+            android:textSize="20sp"
+            android:layout_marginTop="40dp"/>
+        <Button
+            android:id="@+id/houseRButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="주택정보 관리"
+            android:textSize="20sp"
+            android:layout_marginTop="40dp"/>
+
+        <Button
+            android:id="@+id/houseMButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="청구금액 관리"
+            android:textSize="20sp"
+            android:layout_marginTop="40dp"/>
+        <Button
+            android:id="@+id/houseUButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="사용량정보 관리"
+            android:textSize="20sp"
+            android:layout_marginTop="40dp"/>
+
+    </LinearLayout>
+</LinearLayout>
