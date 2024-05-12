@@ -25,8 +25,48 @@ public class AdminActivity extends AppCompatActivity {
         // 홈 아이콘에 클릭 리스너 설정
         imgHomeIcon.setOnClickListener(new HomeIconClickListener(this));
 
+        Button btnHouseC = findViewById(R.id.houseCButton);
+        Button btnPerSon = findViewById(R.id.personButton);
         Button btnRegistration = findViewById(R.id.registrationButton);
+        Button btnHouseR = findViewById(R.id.houseRButton);
+        Button btnHouseM = findViewById(R.id.houseMButton);
+        Button btnHouseU = findViewById(R.id.houseUButton);
+        btnHouseC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),RegistrationActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnPerSon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),RegistrationActivity.class);
+                startActivity(intent);
+            }
+        });
         btnRegistration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),RegistrationActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnHouseR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),RegistrationActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnHouseM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),RegistrationActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnHouseU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),RegistrationActivity.class);
