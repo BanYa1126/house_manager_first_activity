@@ -31,17 +31,18 @@ public class AdminActivity extends AppCompatActivity {
         Button btnHouseR = findViewById(R.id.houseRButton);
         Button btnHouseM = findViewById(R.id.houseMButton);
         Button btnHouseU = findViewById(R.id.houseUButton);
+
         btnHouseC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),RegistrationActivity.class);
+                Intent intent = new Intent(getApplicationContext(),HouseCActivity.class);
                 startActivity(intent);
             }
         });
         btnPerSon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),RegistrationActivity.class);
+                Intent intent = new Intent(getApplicationContext(),PersonActivity.class);
                 startActivity(intent);
             }
         });
