@@ -17,14 +17,9 @@
         android:orientation="vertical"
         android:padding="16dp">
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="계약자 정보 확인"
-            android:textSize="25dp"/>
-        <ListView
-            android:id="@+id/person_listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="40dp"/>
+            android:gravity="center"
+            android:text=""/>
     </LinearLayout>
 </LinearLayout>
