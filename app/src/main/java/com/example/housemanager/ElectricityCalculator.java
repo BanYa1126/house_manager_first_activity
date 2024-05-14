@@ -1,6 +1,6 @@
 package com.example.housemanager;
 // ElectricityCalculator.java
-
+//test
 public class ElectricityCalculator {
 
     public static double calculateElectricityBill(double totalConsumption) {
