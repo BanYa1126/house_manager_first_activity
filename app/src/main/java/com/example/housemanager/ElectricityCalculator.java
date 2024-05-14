@@ -1,6 +1,6 @@
 package com.example.housemanager;
 // ElectricityCalculator.java
-//병신
+//병신ㅁㄴㅇㄻㄴㄻㄴㄻㄴㄻㄴㄻㄴ
 public class ElectricityCalculator {
 
     public static double calculateElectricityBill(double totalConsumption) {
