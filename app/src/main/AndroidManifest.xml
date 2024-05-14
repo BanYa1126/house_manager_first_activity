@@ -27,6 +27,11 @@
         <activity android:name=".AdminActivity"/>
         <activity android:name=".EmployerActivity"/>
         <activity android:name=".RegistrationActivity"/>
+        <activity android:name=".HouseCActivity"/>
+        <activity android:name=".HouseMActivity"/>
+        <activity android:name=".HouseRActivity"/>
+        <activity android:name=".HouseUActivity"/>
+        <activity android:name=".PersonActivity"/>
     </application>
 
 </manifest>
