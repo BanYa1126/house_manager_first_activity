@@ -28,7 +28,7 @@
             android:id="@+id/personButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="임차인정보 등록"
+            android:text="임차인정보 관리"
             android:textSize="20sp"
             android:layout_marginTop="40dp"/>
 

@@ -56,21 +56,21 @@ public class AdminActivity extends AppCompatActivity {
         btnHouseR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),RegistrationActivity.class);
+                Intent intent = new Intent(getApplicationContext(),HouseRActivity.class);
                 startActivity(intent);
             }
         });
         btnHouseM.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),RegistrationActivity.class);
+                Intent intent = new Intent(getApplicationContext(),HouseMActivity.class);
                 startActivity(intent);
             }
         });
         btnHouseU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),RegistrationActivity.class);
+                Intent intent = new Intent(getApplicationContext(),HouseUActivity.class);
                 startActivity(intent);
             }
         });
