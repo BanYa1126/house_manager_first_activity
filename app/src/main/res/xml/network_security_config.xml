@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <!-- 신뢰할 수 있는 CA 인증서 목록 -->
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+
+    <!-- 자체 서명된 인증서를 신뢰하도록 특정 도메인 설정 -->
+    <domain-config>
+        <domain includeSubdomains="true">10.0.2.2</domain>
+        <trust-anchors>
+            <certificates src="@raw/myserver" /> <!-- raw 리소스 폴더에 인증서 파일 저장 필요 -->
+        </trust-anchors>
+    </domain-config>
+</network-security-config>

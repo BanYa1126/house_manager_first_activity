@@ -1,6 +1,6 @@
 package com.example.housemanager;
 // ElectricityCalculator.java
-//삼성 병신
+//test
 public class ElectricityCalculator {
 
     public static double calculateElectricityBill(double totalConsumption) {
