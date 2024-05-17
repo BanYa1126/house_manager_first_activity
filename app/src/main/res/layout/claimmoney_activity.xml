@@ -19,7 +19,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="주택 정보 선택"
+            android:text="주택정보 확인"
             android:textSize="25dp"/>
         <ListView
             android:id="@+id/building_listview"

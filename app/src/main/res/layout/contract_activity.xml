@@ -10,12 +10,6 @@
     <include
         android:id="@+id/headerAdmin"
         layout="@layout/activity_admin" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="25sp"
-        android:text="계약 정보 등록"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -104,15 +98,14 @@
             android:layout_height="wrap_content"
             android:hint="비고를 입력해주세요."
             android:inputType="text"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="20dp"/>
     </LinearLayout>
     </ScrollView>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="20dp">
+            android:gravity="center">
             <Button
                 android:id="@+id/CIButton"
                 android:layout_width="wrap_content"
