@@ -15,7 +15,7 @@ public class HouseMActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.claimmoney_activity_main);
+        setContentView(R.layout.claimmoney_activity);
 
         Context context = this;
         // 헤더 레이아웃 포함
