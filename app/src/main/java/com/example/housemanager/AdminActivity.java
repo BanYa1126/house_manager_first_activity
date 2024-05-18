@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.LinearLayout;
 public class AdminActivity extends AppCompatActivity {
 
     @Override
@@ -18,12 +19,10 @@ public class AdminActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_main);
 
-        Context context = this;
-        // 헤더 레이아웃 포함
-        View header = findViewById(R.id.headerAdmin);
-        ImageView imgHomeIcon = header.findViewById(R.id.imgHomeIcon);
-        // 홈 아이콘에 클릭 리스너 설정
-        imgHomeIcon.setOnClickListener(new HomeIconClickListener(this));
+        LinearLayout headerAdmin = findViewById(R.id.headerAdmin);
+
+        HomeIconClickListener listener = new HomeIconClickListener(this);
+        headerAdmin.setOnClickListener(listener);
 
         Button btnHouseC = findViewById(R.id.houseCButton);
         Button btnPerSon = findViewById(R.id.personButton);
@@ -60,17 +59,18 @@ public class AdminActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        btnHouseM.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),HouseMActivity.class);
-                startActivity(intent);
-            }
-        });
+
         btnHouseU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),HouseUActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnHouseM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),HouseMActivity.class);
                 startActivity(intent);
             }
         });

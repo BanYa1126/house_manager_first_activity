@@ -14,27 +14,32 @@ public class HomeIconClickListener implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        // headerAdmin과 headerEmployer 뷰의 ID를 가져와서 처리
         int headerId = view.getId();
-        ImageView homeIcon = null;
 
+        ImageView homeIcon;
         if (headerId == R.id.headerAdmin) {
             homeIcon = view.findViewById(R.id.imgHomeIcon);
-            homeIcon.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, AdminActivity.class);
-                    context.startActivity(intent);
-                }
-            });
+            if (homeIcon != null) {
+                homeIcon.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, AdminActivity.class);
+                        context.startActivity(intent);
+                    }
+                });
+            }
         } else if (headerId == R.id.headerEmployer) {
             homeIcon = view.findViewById(R.id.imgHomeIcon);
-            homeIcon.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, EmployerActivity.class);
-                    context.startActivity(intent);
-                }
-            });
+            if (homeIcon != null) {
+                homeIcon.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, EmployerActivity.class);
+                        context.startActivity(intent);
+                    }
+                });
+            }
         }
     }
 }

@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.LinearLayout;
 public class EmployerActivity extends AppCompatActivity {
 
     @Override
@@ -18,12 +19,9 @@ public class EmployerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employer_main);
 
-        Context context = this;
-        // 헤더 레이아웃 포함
-        View header = findViewById(R.id.headerEmployer);
-        ImageView imgHomeIcon = header.findViewById(R.id.imgHomeIcon);
+        LinearLayout headerEmployer = findViewById(R.id.headerEmployer);
 
-        // 홈 아이콘에 클릭 리스너 설정
-        imgHomeIcon.setOnClickListener(new HomeIconClickListener(this));
+        HomeIconClickListener listener = new HomeIconClickListener(this);
+        headerEmployer.setOnClickListener(listener);
     }
 }

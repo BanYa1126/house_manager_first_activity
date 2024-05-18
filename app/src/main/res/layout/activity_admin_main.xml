@@ -48,13 +48,6 @@
             android:layout_marginTop="40dp"/>
 
         <Button
-            android:id="@+id/houseMButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="청구내역 관리"
-            android:textSize="20sp"
-            android:layout_marginTop="40dp"/>
-        <Button
             android:id="@+id/houseUButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,5 +55,12 @@
             android:textSize="20sp"
             android:layout_marginTop="40dp"/>
 
+        <Button
+            android:id="@+id/houseMButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="청구내역 관리"
+            android:textSize="20sp"
+            android:layout_marginTop="40dp"/>
     </LinearLayout>
 </LinearLayout>
