@@ -28,10 +28,13 @@
         <activity android:name=".EmployerActivity"/>
         <activity android:name=".RegistrationActivity"/>
         <activity android:name=".HouseCActivity"/>
+        <activity android:name=".HouseCActivity2"/>
         <activity android:name=".HouseMActivity"/>
         <activity android:name=".HouseRActivity"/>
+        <activity android:name=".HouseRActivity2"/>
         <activity android:name=".HouseUActivity"/>
         <activity android:name=".PersonActivity"/>
+        <activity android:name=".PersonActivity2"/>
     </application>
 
 </manifest>

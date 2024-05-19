@@ -17,17 +17,20 @@
         android:orientation="vertical"
         android:padding="16dp">
         <Button
+            android:id="@+id/person1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="임차인 정보 등록"
             android:textSize="20sp" />
         <Button
+            android:id="@+id/person2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="임차인 정보 수정"
             android:textSize="20sp"
             android:layout_marginTop="40dp"/>
         <Button
+            android:id="@+id/person3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="임차인 정보 삭제"

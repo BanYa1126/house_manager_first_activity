@@ -22,5 +22,31 @@ public class PersonActivity extends AppCompatActivity {
 
         HomeIconClickListener listener = new HomeIconClickListener(this);
         headerAdmin.setOnClickListener(listener);
+
+        Button Person1 = findViewById(R.id.person1);
+        Button Person2 = findViewById(R.id.person2);
+        Button Person3 = findViewById(R.id.person3);
+
+        Person1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),PersonActivity2.class);
+                startActivity(intent);
+            }
+        });
+        Person2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),PersonActivity.class);
+                startActivity(intent);
+            }
+        });
+        Person3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),PersonActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

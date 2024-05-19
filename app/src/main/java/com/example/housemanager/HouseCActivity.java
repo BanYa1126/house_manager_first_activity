@@ -22,5 +22,31 @@ public class HouseCActivity extends AppCompatActivity {
 
         HomeIconClickListener listener = new HomeIconClickListener(this);
         headerAdmin.setOnClickListener(listener);
+
+        Button Contract1 = findViewById(R.id.contract1);
+        Button Contract2 = findViewById(R.id.contract2);
+        Button Contract3 = findViewById(R.id.contract3);
+
+        Contract1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),HouseCActivity2.class);
+                startActivity(intent);
+            }
+        });
+        Contract2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),HouseCActivity.class);
+                startActivity(intent);
+            }
+        });
+        Contract3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),HouseCActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
