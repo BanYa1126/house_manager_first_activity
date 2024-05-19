@@ -1,4 +1,4 @@
-package com.example.housemanager;
+package com.example.housemanager
 
 import android.util.Log
 import io.socket.client.IO
@@ -10,6 +10,11 @@ import retrofit2.Response
 import android.widget.Toast
 import android.content.Context
 
+data class ReceivedDataEvent(val message: String)
+interface EventCallback {
+    fun onEventReceived(event: ReceivedDataEvent)
+}
+
 interface LoginCallback {
     fun onLoginResult(result: String)
 }
@@ -20,12 +25,11 @@ class Connect_to_Backend {
     var accessToken: String? = null
     var refreshToken: String? = null
     var permission: String? = null
+    private var eventCallback: EventCallback? = null
 
     init {
         try {
-
             // 서버 URL 설정
-            //mSocket = IO.socket("https://10.0.2.2:8000")
             mSocket = IO.socket(RetrofitInstance.BASE_URL)
             //mSocket = IO.socket("https://hm.jftt.kr") //For Real Docker Server
             //mSocket = IO.socket("https://10.0.2.2:5000") //For localhost TEST
@@ -48,12 +52,10 @@ class Connect_to_Backend {
             // 서버로부터 메시지 받기
             mSocket.on("receive_message") { args ->
                 Log.d(TAG, "메시지: " + args[0])
-                if (args[0] is Boolean) {
-                    val success = args[0] as Boolean
-                    handleLoginResponse(success)
-                }
+                handleReceivedData(args)
             }
 
+            // 서버로부터 요청한 데이터 받기
             mSocket.on("responsed_data") { args ->
                 Log.d(TAG, "받은 데이터: " + args[0])
                 handleReceivedData(args)
@@ -63,16 +65,32 @@ class Connect_to_Backend {
             Log.e(TAG, "서버 연결 실패: ", e)  // 예외와 함께 로그를 남깁니다.
         }
     }
+
+    // Singleton 패턴 구현
+    companion object {
+        @Volatile private var instance: Connect_to_Backend? = null
+        @JvmStatic
+        @Synchronized
+        fun getInstance(): Connect_to_Backend {
+            return instance ?: synchronized(this) {
+                instance ?: Connect_to_Backend().also { instance = it }
+            }
+        }
+    }
+
+    // 이벤트 콜백 설정
+    fun setEventCallback(callback: EventCallback) {
+        this.eventCallback = callback
+    }
+
     private fun handleReceivedData(args: Array<Any>) {
         if (args.isNotEmpty()) {
             try {
                 val data = args[0] as JSONObject
-                val message = data.getString("message")
-                val number = data.getInt("number")
-                val flag = data.getBoolean("flag")
+                val message = data.getString("JSON_DATA")
                 // 받은 데이터를 사용하여 작업 수행
-                Log.d(TAG, "Message: $message, Number: $number, Flag: $flag")
-                // 예: UI 업데이트, 데이터베이스 저장 등
+                Log.d(TAG, "JSON_DATA: $message")
+                eventCallback?.onEventReceived(ReceivedDataEvent(message))
             } catch (e: Exception) {
                 Log.e(TAG, "데이터 처리 실패: ", e)
             }
@@ -93,10 +111,7 @@ class Connect_to_Backend {
                     accessToken = response.body()?.access_token
                     refreshToken = response.body()?.refresh_token
                     permission = response.body()?.permission
-                    Log.d(
-                        TAG,
-                        "Login successful by $permission, access token: $accessToken, refresh token: $refreshToken"
-                    )
+                    Log.d(TAG, "Login successful by $permission, access token: $accessToken, refresh token: $refreshToken")
                     // 토큰을 저장하고 보호된 경로에 접근할 때 사용
                     callback.onLoginResult("Successful by $permission")
                 } else {

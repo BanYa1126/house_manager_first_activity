@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 public class HomeIconClickListener implements View.OnClickListener {
+    private static final String TAG = "HomeIconClickListener"; // 로그를 구분하기 위한 TAG 설정
+    private Connect_to_Backend backend;
     private final Context context;
 
     public HomeIconClickListener(Context context) {

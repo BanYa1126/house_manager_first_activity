@@ -2,6 +2,8 @@ package com.example.housemanager;
 // ElectricityCalculator.java
 
 public class ElectricityCalculator {
+    private static final String TAG = "ElectricityCalculator"; // 로그를 구분하기 위한 TAG 설정
+    private Connect_to_Backend backend;
 
     public static double calculateElectricityBill(double totalConsumption) {
         double baseRate;
