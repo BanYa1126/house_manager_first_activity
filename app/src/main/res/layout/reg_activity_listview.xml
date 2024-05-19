@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:background="#99CCFF"
             android:gravity="center"
-            android:text="계약관리번호 : "
+            android:text="임차인 계약관리번호 : "
             android:textSize="25sp"
             android:layout_marginBottom="5dp"/>
     </LinearLayout>
@@ -29,6 +29,6 @@
         android:layout_height="wrap_content"
         android:background="#FFCCFF"
         android:gravity="center"
-        android:text="계약자 이름 : "
+        android:text="임차인 이름 : "
         android:textSize="25sp" />
 </LinearLayout>

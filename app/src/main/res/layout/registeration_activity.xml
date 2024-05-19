@@ -19,14 +19,14 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="계약관리번호 : "
+        android:text="임차인 계약관리번호 : "
         android:textSize="25dp"
         android:layout_marginTop="20dp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="계약자 이름 : "
+        android:text="임차인 이름 : "
         android:textSize="25dp"
         android:layout_marginTop="30dp"/>
 
