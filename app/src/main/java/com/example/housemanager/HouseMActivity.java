@@ -25,12 +25,8 @@ public class HouseMActivity extends AppCompatActivity {
 
         HomeIconClickListener listener = new HomeIconClickListener(this);
         headerAdmin.setOnClickListener(listener);
+
         Context context = this;
-        // 헤더 레이아웃 포함
-        View header = findViewById(R.id.headerAdmin);
-        ImageView imgHomeIcon = header.findViewById(R.id.imgHomeIcon);
-        // 홈 아이콘에 클릭 리스너 설정
-        imgHomeIcon.setOnClickListener(new HomeIconClickListener(this));
 
         // Singleton 인스턴스 가져오기
         backend = Connect_to_Backend.getInstance();

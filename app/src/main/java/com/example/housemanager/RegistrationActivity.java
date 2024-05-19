@@ -31,8 +31,8 @@ public class RegistrationActivity extends AppCompatActivity {
         ListView listView = findViewById(R.id.person_listview);
 
         // 표시할 단일 데이터
-        String[] data = {"test1","test2","test3","test4","test5"};
-        String[] name ={"이준화","박진혁","이진형","최영재","김강희"};
+        String[] data = {"test1", "test2", "test3", "test4", "test5"};
+        String[] name = {"이준화", "박진혁", "이진형", "최영재", "김강희"};
 
         CustomAdapter1 adapter = new CustomAdapter1(this, data, name);
 
@@ -46,15 +46,17 @@ public class RegistrationActivity extends AppCompatActivity {
                 // Intent를 사용하여 SecondActivity로 전환
                 Intent intent = new Intent(RegistrationActivity.this, RegistrationActivity2.class);
                 startActivity(intent);
-        setContentView(R.layout.registeration_activity);
+                setContentView(R.layout.registeration_activity);
 
-        // Singleton 인스턴스 가져오기
-        backend = Connect_to_Backend.getInstance();
-        backend.setEventCallback(new EventCallback() {
-            @Override
-            public void onEventReceived(ReceivedDataEvent event) {
-                Log.d(TAG, "Received data: " + event.getMessage());
-                // 받은 데이터의 JSON을 알아서 파싱해서 UI 업데이트 등의 작업 수행
+                // Singleton 인스턴스 가져오기
+                backend = Connect_to_Backend.getInstance();
+                backend.setEventCallback(new EventCallback() {
+                    @Override
+                    public void onEventReceived(ReceivedDataEvent event) {
+                        Log.d(TAG, "Received data: " + event.getMessage());
+                        // 받은 데이터의 JSON을 알아서 파싱해서 UI 업데이트 등의 작업 수행
+                    }
+                });
             }
         });
     }
