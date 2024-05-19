@@ -3,14 +3,10 @@ package com.example.housemanager;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
 import android.widget.LinearLayout;
 public class EmployerActivity extends AppCompatActivity {
 
@@ -23,5 +19,39 @@ public class EmployerActivity extends AppCompatActivity {
 
         HomeIconClickListener listener = new HomeIconClickListener(this);
         headerEmployer.setOnClickListener(listener);
+
+        Button UseButton = findViewById(R.id.useButton);
+        Button HouseCheckButton = findViewById(R.id.housecheckButton);
+        Button ContractButton = findViewById(R.id.contractButton);
+        Button MoneyButton = findViewById(R.id.moneyButton);
+
+        UseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),HouseCActivity.class);
+                startActivity(intent);
+            }
+        });
+        HouseCheckButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), HouseCheckViewActivity.class);
+                startActivity(intent);
+            }
+        });
+        ContractButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),ContractViewActivity.class);
+                startActivity(intent);
+            }
+        });
+        MoneyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),HouseRActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

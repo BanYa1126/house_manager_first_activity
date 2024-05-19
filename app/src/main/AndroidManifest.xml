@@ -24,6 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".HouseCheckViewActivity"/>
+        <activity android:name=".ContractViewActivity"/>
         <activity android:name=".AdminActivity"/>
         <activity android:name=".EmployerActivity"/>
         <activity android:name=".RegistrationActivity"/>
