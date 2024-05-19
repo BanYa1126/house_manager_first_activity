@@ -54,11 +54,30 @@ class Connect_to_Backend {
                 }
             }
 
+            mSocket.on("responsed_data") { args ->
+                Log.d(TAG, "받은 데이터: " + args[0])
+                handleReceivedData(args)
+            }
+
         } catch (e: Exception) {
             Log.e(TAG, "서버 연결 실패: ", e)  // 예외와 함께 로그를 남깁니다.
         }
     }
-
+    private fun handleReceivedData(args: Array<Any>) {
+        if (args.isNotEmpty()) {
+            try {
+                val data = args[0] as JSONObject
+                val message = data.getString("message")
+                val number = data.getInt("number")
+                val flag = data.getBoolean("flag")
+                // 받은 데이터를 사용하여 작업 수행
+                Log.d(TAG, "Message: $message, Number: $number, Flag: $flag")
+                // 예: UI 업데이트, 데이터베이스 저장 등
+            } catch (e: Exception) {
+                Log.e(TAG, "데이터 처리 실패: ", e)
+            }
+        }
+    }
 
     fun login(context: Context, username: String, password: String, callback: LoginCallback) {
         val data = JSONObject()
