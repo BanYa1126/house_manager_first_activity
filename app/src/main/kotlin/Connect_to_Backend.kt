@@ -26,8 +26,10 @@ class Connect_to_Backend {
 
             // 서버 URL 설정
             //mSocket = IO.socket("https://10.0.2.2:8000")
-            mSocket = IO.socket("https://hm.jftt.kr") //For Real Docker Server
+            mSocket = IO.socket(RetrofitInstance.BASE_URL)
+            //mSocket = IO.socket("https://hm.jftt.kr") //For Real Docker Server
             //mSocket = IO.socket("https://10.0.2.2:5000") //For localhost TEST
+
             try {
                 Log.d(TAG, "서버 연결시도중...")
                 mSocket.connect()
