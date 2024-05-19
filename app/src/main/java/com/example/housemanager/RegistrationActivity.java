@@ -28,15 +28,14 @@ public class RegistrationActivity extends AppCompatActivity {
 
         // 표시할 단일 데이터
         String[] data = {"test1","test2","test3","test4","test5"};
+        String[] name ={"이준화","박진혁","이진형","최영재","김강희"};
 
-        // ArrayAdapter 생성
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                data
-        );
+        CustomAdapter1 adapter = new CustomAdapter1(this, data, name);
+
         // ListView에 어댑터 설정
         listView.setAdapter(adapter);
+
+        // ListView 아이템 클릭 리스너 설정
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
