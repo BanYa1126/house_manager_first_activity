@@ -20,6 +20,6 @@
             android:gravity="center"
             android:text="호수 정보 : "
             android:textSize="25sp"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="15dp"/>
     </LinearLayout>
 </LinearLayout>
