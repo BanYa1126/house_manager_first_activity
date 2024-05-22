@@ -26,19 +26,22 @@
             android:id="@+id/btnStartDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Select Start Date" />
+            android:textSize="30sp"
+            android:text="조회 시작 날짜 선택"
+            android:layout_marginTop="50dp"/>
 
         <Button
             android:id="@+id/btnEndDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Select End Date"
+            android:textSize="30sp"
+            android:text="조회 종료 날짜 선택"
             android:layout_marginTop="50dp"/>
         <TextView
             android:id="@+id/txtSelectedDates"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Selected Dates: "
+            android:text="선택한 기간 : "
             android:paddingTop="20dp"
             android:textSize="18sp" />
         <Button

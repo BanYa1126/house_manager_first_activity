@@ -40,6 +40,11 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:text="청구일 : "/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="수정할 청구일을 작성해주세요."
+                    android:inputType="text" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -47,6 +52,11 @@
                     android:textSize="18sp"
                     android:layout_marginTop="8dp"
                     android:text="임대료 : "/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="수정할 임대료를 작성해주세요."
+                    android:inputType="text" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -54,6 +64,11 @@
                     android:textSize="18sp"
                     android:layout_marginTop="8dp"
                     android:text="관리비 : "/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="수정할 관리비를 작성해주세요."
+                    android:inputType="text" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -61,6 +76,11 @@
                     android:textSize="18sp"
                     android:layout_marginTop="8dp"
                     android:text="미납급 : "/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="수정할 미납금을 작성해주세요."
+                    android:inputType="text" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -68,6 +88,11 @@
                     android:textSize="18sp"
                     android:layout_marginTop="8dp"
                     android:text="가감액 : "/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="수정할 가감액을 작성해주세요."
+                    android:inputType="text" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -75,6 +100,11 @@
                     android:textSize="18sp"
                     android:layout_marginTop="8dp"
                     android:text="전기 청구액 : "/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="수정할 전기 청구액을 작성해주세요."
+                    android:inputType="text" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -82,6 +112,11 @@
                     android:textSize="18sp"
                     android:layout_marginTop="8dp"
                     android:text="가스 청구액 : "/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="수정할 가스 청구액을 작성해주세요."
+                    android:inputType="text" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -89,6 +124,11 @@
                     android:textSize="18sp"
                     android:layout_marginTop="8dp"
                     android:text="난방 청구액 : "/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="수정할 난방 청구액을 작성해주세요."
+                    android:inputType="text" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -96,6 +136,11 @@
                     android:textSize="18sp"
                     android:layout_marginTop="8dp"
                     android:text="통신 청구액 : "/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="수정할 통신 청구액을 작성해주세요."
+                    android:inputType="text" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -103,6 +148,11 @@
                     android:textSize="18sp"
                     android:layout_marginTop="8dp"
                     android:text="전기 청구액 : "/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="수정할 전기 청구액을 작성해주세요."
+                    android:inputType="text" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -110,6 +160,11 @@
                     android:textSize="18sp"
                     android:layout_marginTop="8dp"
                     android:text="청구 비고 : "/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="수정할 청구 비고란을 작성해주세요."
+                    android:inputType="text" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -117,6 +172,11 @@
                     android:textSize="18sp"
                     android:layout_marginTop="8dp"
                     android:text="납입 방식 : "/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="수정할 납입 방식을 작성해주세요."
+                    android:inputType="text" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -124,6 +184,11 @@
                     android:textSize="18sp"
                     android:layout_marginTop="8dp"
                     android:text="납입 기한 : "/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="수정할 납입 기한을 작성해주세요."
+                    android:inputType="text" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -131,6 +196,11 @@
                     android:textSize="18sp"
                     android:layout_marginTop="8dp"
                     android:text="마지막 납입 날짜 : "/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="수정할 마지막 납입 날짜을 작성해주세요."
+                    android:inputType="text" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -138,6 +208,11 @@
                     android:textSize="18sp"
                     android:layout_marginTop="8dp"
                     android:text="납입액 : "/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="납입액을 작성해주세요."
+                    android:inputType="text" />
 
             </LinearLayout>
         </ScrollView>
