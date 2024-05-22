@@ -34,10 +34,10 @@ public class HouseUActivity extends AppCompatActivity {
         // 표시할 단일 데이터
         String[] data = {"101", "102", "103", "104", "201"};
 
-        CustomAdapter2 adapter = new CustomAdapter2(this, data);
+        CustomAdapter2 adapter2 = new CustomAdapter2(this, data);
 
         // ListView에 어댑터 설정
-        listView.setAdapter(adapter);
+        listView.setAdapter(adapter2);
 
         // ListView 아이템 클릭 리스너 설정
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

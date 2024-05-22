@@ -37,10 +37,10 @@ public class CustomAdapter3 extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.claimmoney_activity, parent, false);
+            convertView = inflater.inflate(R.layout.house_information_listview, parent, false);
         }
 
-        TextView RegNumberText = convertView.findViewById(R.id.RegNumber);
+        TextView RegNumberText = convertView.findViewById(R.id.HouseNumber);
 
         RegNumberText.setText("세대 번호 : " + RegNum[position]);
         return convertView;

@@ -40,7 +40,7 @@ public class CustomAdapter2 extends BaseAdapter {
             convertView = inflater.inflate(R.layout.building_listview_activity, parent, false);
         }
 
-        TextView RegNumberText = convertView.findViewById(R.id.RegNumber);
+        TextView RegNumberText = convertView.findViewById(R.id.RegNum);
 
         RegNumberText.setText("호수 정보 : " + RegNum[position]);
         return convertView;

@@ -16,9 +16,6 @@ import android.widget.LinearLayout;
 public class AdminActivity extends AppCompatActivity {
     private static final String TAG = "AdminActivity"; // 로그를 구분하기 위한 TAG 설정
     private Connect_to_Backend backend;
-
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

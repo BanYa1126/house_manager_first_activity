@@ -28,17 +28,15 @@ public class HouseMActivity extends AppCompatActivity {
         HomeIconClickListener listener = new HomeIconClickListener(this);
         headerAdmin.setOnClickListener(listener);
 
-        Context context = this;
-
         ListView listView = findViewById(R.id.HouseNumber_listview);
 
         // 표시할 단일 데이터
         String[] data = {"Test data 101", "Test data 102", "Test data 103", "Test data 104", "Test data 201"};
 
-        CustomAdapter3 adapter = new CustomAdapter3(this, data);
+        CustomAdapter3 adapter3 = new CustomAdapter3(this, data);
 
         // ListView에 어댑터 설정
-        listView.setAdapter(adapter);
+        listView.setAdapter(adapter3);
 
         // ListView 아이템 클릭 리스너 설정
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -47,7 +45,7 @@ public class HouseMActivity extends AppCompatActivity {
                 // Intent를 사용하여 SecondActivity로 전환
                 Intent intent = new Intent(HouseMActivity.this, HouseMActivity1.class);
                 startActivity(intent);
-                setContentView(R.layout.claimmoney_activity);
+                setContentView(R.layout.claimmoney_activity_main);
 
                 // Singleton 인스턴스 가져오기
                 backend = Connect_to_Backend.getInstance();
