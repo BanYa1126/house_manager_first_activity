@@ -29,6 +29,9 @@ public class HouseUActivity extends AppCompatActivity {
         HomeIconClickListener listener = new HomeIconClickListener(this);
         headerAdmin.setOnClickListener(listener);
 
+        MenuClickListener menuClickListener = new MenuClickListener(this);
+        headerAdmin.setOnClickListener(menuClickListener);
+
         ListView listView = findViewById(R.id.building_listview);
 
         // 표시할 단일 데이터

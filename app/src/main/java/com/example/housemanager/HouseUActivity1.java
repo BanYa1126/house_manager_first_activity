@@ -24,5 +24,8 @@ public class HouseUActivity1 extends AppCompatActivity {
 
         HomeIconClickListener listener = new HomeIconClickListener(this);
         headerAdmin.setOnClickListener(listener);
+
+        MenuClickListener menuClickListener = new MenuClickListener(this);
+        headerAdmin.setOnClickListener(menuClickListener);
     }
 }

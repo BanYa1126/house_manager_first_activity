@@ -21,6 +21,11 @@
         android:textSize="25sp"
         android:gravity="center"
         android:text="세대 번호 : "/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="23sp"
+        android:text="기간 : "/>
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,20 +40,6 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:text="청구일 : "/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:layout_marginTop="8dp"
-                    android:text="청구기간 시작일 : "/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:layout_marginTop="8dp"
-                    android:text="청구기간 종료일 : "/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -70,6 +61,13 @@
                     android:textSize="18sp"
                     android:layout_marginTop="8dp"
                     android:text="미납급 : "/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_marginTop="8dp"
+                    android:text="가감액 : "/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -141,12 +139,6 @@
                     android:layout_marginTop="8dp"
                     android:text="납입액 : "/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:layout_marginTop="8dp"
-                    android:text="가감액 : "/>
             </LinearLayout>
         </ScrollView>
         <LinearLayout

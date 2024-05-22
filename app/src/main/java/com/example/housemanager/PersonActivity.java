@@ -29,6 +29,9 @@ public class PersonActivity extends AppCompatActivity {
         HomeIconClickListener listener = new HomeIconClickListener(this);
         headerAdmin.setOnClickListener(listener);
 
+        MenuClickListener menuClickListener = new MenuClickListener(this);
+        headerAdmin.setOnClickListener(menuClickListener);
+
         Button Person1 = findViewById(R.id.person1);
         Button Person2 = findViewById(R.id.person2);
         Button Person3 = findViewById(R.id.person3);

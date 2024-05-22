@@ -29,6 +29,9 @@ public class HouseRActivity extends AppCompatActivity {
         HomeIconClickListener listener = new HomeIconClickListener(this);
         headerAdmin.setOnClickListener(listener);
 
+        MenuClickListener menuClickListener = new MenuClickListener(this);
+        headerAdmin.setOnClickListener(menuClickListener);
+
         Button House1 = findViewById(R.id.house1);
         Button House2 = findViewById(R.id.house2);
         Button House3 = findViewById(R.id.house3);

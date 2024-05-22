@@ -16,5 +16,8 @@ public class HouseCheckViewActivity extends AppCompatActivity {
 
         HomeIconClickListener listener = new HomeIconClickListener(this);
         headerEmployer.setOnClickListener(listener);
+
+        MenuClickListener menuClickListener = new MenuClickListener(this);
+        headerEmployer.setOnClickListener(menuClickListener);
     }
 }

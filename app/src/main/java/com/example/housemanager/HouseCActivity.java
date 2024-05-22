@@ -29,6 +29,9 @@ public class HouseCActivity extends AppCompatActivity {
         HomeIconClickListener listener = new HomeIconClickListener(this);
         headerAdmin.setOnClickListener(listener);
 
+        MenuClickListener menuClickListener = new MenuClickListener(this);
+        headerAdmin.setOnClickListener(menuClickListener);
+
         Button Contract1 = findViewById(R.id.contract1);
         Button Contract2 = findViewById(R.id.contract2);
         Button Contract3 = findViewById(R.id.contract3);

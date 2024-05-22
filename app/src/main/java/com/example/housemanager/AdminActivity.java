@@ -26,6 +26,9 @@ public class AdminActivity extends AppCompatActivity {
         HomeIconClickListener listener = new HomeIconClickListener(this);
         headerAdmin.setOnClickListener(listener);
 
+        MenuClickListener menuClickListener = new MenuClickListener(this);
+        headerAdmin.setOnClickListener(menuClickListener);
+
         Button btnHouseC = findViewById(R.id.houseCButton);
         Button btnPerSon = findViewById(R.id.personButton);
         Button btnRegistration = findViewById(R.id.registrationButton);

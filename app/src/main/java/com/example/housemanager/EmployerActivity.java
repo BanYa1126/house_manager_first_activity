@@ -23,6 +23,9 @@ public class EmployerActivity extends AppCompatActivity {
         HomeIconClickListener listener = new HomeIconClickListener(this);
         headerEmployer.setOnClickListener(listener);
 
+        MenuClickListener menuClickListener = new MenuClickListener(this);
+        headerEmployer.setOnClickListener(menuClickListener);
+
         Button UseButton = findViewById(R.id.useButton);
         Button HouseCheckButton = findViewById(R.id.housecheckButton);
         Button ContractButton = findViewById(R.id.contractButton);
