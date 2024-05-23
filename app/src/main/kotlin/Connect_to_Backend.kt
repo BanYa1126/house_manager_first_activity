@@ -31,8 +31,6 @@ class Connect_to_Backend {
         try {
             // 서버 URL 설정
             mSocket = IO.socket(RetrofitInstance.BASE_URL)
-            //mSocket = IO.socket("https://hm.jftt.kr") //For Real Docker Server
-            //mSocket = IO.socket("https://10.0.2.2:5000") //For localhost TEST
 
             try {
                 Log.d(TAG, "서버 연결시도중...")
@@ -129,6 +127,14 @@ class Connect_to_Backend {
                 Toast.makeText(context, "Unknown error: ${loginResult}", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    fun mgmt_read_to_Backend_with_socket(entity: String, option: String){
+        val data = JSONObject()
+        data.put("access_token", accessToken)
+        data.put("entity", entity)
+        data.put("option", option)
+        mSocket.emit("mgmt_read", data)
     }
 
     private fun handleLoginResponse(success: Boolean) {
