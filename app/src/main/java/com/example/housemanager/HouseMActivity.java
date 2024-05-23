@@ -24,12 +24,14 @@ public class HouseMActivity extends AppCompatActivity {
         setContentView(R.layout.claimmoney_activity);
 
         LinearLayout headerAdmin = findViewById(R.id.headerAdmin);
+        ImageView imgMenuIcon = findViewById(R.id.imgMenuIcon);
 
         HomeIconClickListener listener = new HomeIconClickListener(this);
         headerAdmin.setOnClickListener(listener);
 
+        // MenuClickListener 설정
         MenuClickListener menuClickListener = new MenuClickListener(this);
-        headerAdmin.setOnClickListener(menuClickListener);
+        imgMenuIcon.setOnClickListener(menuClickListener);
 
         ListView listView = findViewById(R.id.HouseNumber_listview);
 

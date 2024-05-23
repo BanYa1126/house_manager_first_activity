@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 public class EmployerActivity extends AppCompatActivity {
     private static final String TAG = "EmployerActivity"; // 로그를 구분하기 위한 TAG 설정
@@ -19,12 +20,14 @@ public class EmployerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_employer_main);
 
         LinearLayout headerEmployer = findViewById(R.id.headerEmployer);
+        ImageView imgMenuIcon = findViewById(R.id.imgMenuIcon);
 
         HomeIconClickListener listener = new HomeIconClickListener(this);
         headerEmployer.setOnClickListener(listener);
 
+        // MenuClickListener 설정
         MenuClickListener menuClickListener = new MenuClickListener(this);
-        headerEmployer.setOnClickListener(menuClickListener);
+        imgMenuIcon.setOnClickListener(menuClickListener);
 
         Button UseButton = findViewById(R.id.useButton);
         Button HouseCheckButton = findViewById(R.id.housecheckButton);

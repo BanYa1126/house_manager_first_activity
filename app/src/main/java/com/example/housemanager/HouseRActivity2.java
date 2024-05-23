@@ -19,11 +19,13 @@ public class HouseRActivity2 extends AppCompatActivity {
         setContentView(R.layout.house_reg_activity);
 
         LinearLayout headerAdmin = findViewById(R.id.headerAdmin);
+        ImageView imgMenuIcon = findViewById(R.id.imgMenuIcon);
 
         HomeIconClickListener listener = new HomeIconClickListener(this);
         headerAdmin.setOnClickListener(listener);
 
+        // MenuClickListener 설정
         MenuClickListener menuClickListener = new MenuClickListener(this);
-        headerAdmin.setOnClickListener(menuClickListener);
+        imgMenuIcon.setOnClickListener(menuClickListener);
     }
 }

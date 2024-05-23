@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.util.Calendar;
@@ -26,12 +27,14 @@ public class HouseMActivity1 extends AppCompatActivity {
         setContentView(R.layout.claimmoney_time);
 
         LinearLayout headerAdmin = findViewById(R.id.headerAdmin);
+        ImageView imgMenuIcon = findViewById(R.id.imgMenuIcon);
 
         HomeIconClickListener listener = new HomeIconClickListener(this);
         headerAdmin.setOnClickListener(listener);
 
+        // MenuClickListener 설정
         MenuClickListener menuClickListener = new MenuClickListener(this);
-        headerAdmin.setOnClickListener(menuClickListener);
+        imgMenuIcon.setOnClickListener(menuClickListener);
 
         btnStartDate = findViewById(R.id.btnStartDate);
         btnEndDate = findViewById(R.id.btnEndDate);

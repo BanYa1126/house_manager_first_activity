@@ -25,12 +25,14 @@ public class HouseCActivity extends AppCompatActivity {
         setContentView(R.layout.contract_activity_main);
 
         LinearLayout headerAdmin = findViewById(R.id.headerAdmin);
+        ImageView imgMenuIcon = findViewById(R.id.imgMenuIcon);
 
         HomeIconClickListener listener = new HomeIconClickListener(this);
         headerAdmin.setOnClickListener(listener);
 
+        // MenuClickListener 설정
         MenuClickListener menuClickListener = new MenuClickListener(this);
-        headerAdmin.setOnClickListener(menuClickListener);
+        imgMenuIcon.setOnClickListener(menuClickListener);
 
         Button Contract1 = findViewById(R.id.contract1);
         Button Contract2 = findViewById(R.id.contract2);

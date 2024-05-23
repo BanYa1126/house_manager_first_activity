@@ -4,6 +4,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 public class HouseCheckViewActivity extends AppCompatActivity {
 
@@ -13,11 +15,13 @@ public class HouseCheckViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_housecheck_main);
 
         LinearLayout headerEmployer = findViewById(R.id.headerEmployer);
+        ImageView imgMenuIcon = findViewById(R.id.imgMenuIcon);
 
         HomeIconClickListener listener = new HomeIconClickListener(this);
         headerEmployer.setOnClickListener(listener);
 
+        // MenuClickListener 설정
         MenuClickListener menuClickListener = new MenuClickListener(this);
-        headerEmployer.setOnClickListener(menuClickListener);
+        imgMenuIcon.setOnClickListener(menuClickListener);
     }
 }

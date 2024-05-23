@@ -35,7 +35,7 @@
             android:id="@+id/useButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="상세보기"
+            android:text="사용량 상세보기"
             android:textSize="20sp"
             android:layout_marginTop="30dp"/>
         <Button
