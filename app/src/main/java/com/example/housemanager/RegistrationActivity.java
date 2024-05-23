@@ -1,11 +1,9 @@
 package com.example.housemanager;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.util.Log;
 
@@ -49,7 +47,7 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Intent를 사용하여 SecondActivity로 전환
-                Intent intent = new Intent(RegistrationActivity.this, RegistrationActivity2.class);
+                Intent intent = new Intent(RegistrationActivity.this, RegistrationActivity1.class);
                 startActivity(intent);
                 setContentView(R.layout.registeration_activity);
 

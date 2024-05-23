@@ -37,7 +37,7 @@ public class EmployerActivity extends AppCompatActivity {
         UseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), HouseCActivity.class);
+                Intent intent = new Intent(getApplicationContext(), UsageCheckActivity.class);
                 startActivity(intent);
             }
         });
@@ -58,7 +58,7 @@ public class EmployerActivity extends AppCompatActivity {
         MoneyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), HouseRActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MoneyCheckActivity.class);
                 startActivity(intent);
                 // Singleton 인스턴스 가져오기
                 backend = Connect_to_Backend.getInstance();

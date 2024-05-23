@@ -99,6 +99,6 @@ public class HouseMActivity1 extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String startDateString = sdf.format(startDate.getTime());
         String endDateString = sdf.format(endDate.getTime());
-        txtSelectedDates.setText("Selected Dates: " + startDateString + " - " + endDateString);
+        txtSelectedDates.setText("선택된 날짜 : " + startDateString + " - " + endDateString);
     }
 }

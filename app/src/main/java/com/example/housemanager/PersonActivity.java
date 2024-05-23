@@ -9,10 +9,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
+
 public class PersonActivity extends AppCompatActivity {
     private static final String TAG = "PersonActivity"; // 로그를 구분하기 위한 TAG 설정
     private Connect_to_Backend backend;
@@ -41,7 +40,7 @@ public class PersonActivity extends AppCompatActivity {
         Person1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), PersonActivity2.class);
+                Intent intent = new Intent(getApplicationContext(), PersonActivity1.class);
                 startActivity(intent);
             }
         });

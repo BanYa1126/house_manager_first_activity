@@ -9,10 +9,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
+
 public class HouseRActivity extends AppCompatActivity {
     private static final String TAG = "HouseRActivity"; // 로그를 구분하기 위한 TAG 설정
     private Connect_to_Backend backend;
@@ -41,7 +40,7 @@ public class HouseRActivity extends AppCompatActivity {
         House1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), HouseRActivity2.class);
+                Intent intent = new Intent(getApplicationContext(), HouseRActivity1.class);
                 startActivity(intent);
             }
         });
