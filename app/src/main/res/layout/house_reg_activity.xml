@@ -119,11 +119,5 @@
             android:layout_height="wrap_content"
             android:text="주택정보 등록"
             android:textSize="20sp" />
-            <Button
-                android:id="@+id/equipmentButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="비품정보 관리"
-                android:textSize="20sp" />
         </LinearLayout>
 </LinearLayout>
