@@ -129,6 +129,22 @@ class Connect_to_Backend {
         })
     }
 
+
+    fun create_data_from_Backend_with_socket(entity: String, option: String){
+        val data = JSONObject()
+        data.put("access_token", accessToken)
+        data.put("entity", entity)
+        data.put("option", option)
+        mSocket.emit("create_data", data)
+    }
+    fun update_data_from_Backend_with_socket(entity: String, option: String){
+        val data = JSONObject()
+        data.put("access_token", accessToken)
+        data.put("entity", entity)
+        data.put("option", option)
+        mSocket.emit("update_data", data)
+    }
+
     fun read_data_from_Backend_with_socket(entity: String, option: String){
         val data = JSONObject()
         data.put("access_token", accessToken)
@@ -136,6 +152,15 @@ class Connect_to_Backend {
         data.put("option", option)
         mSocket.emit("read_data", data)
     }
+
+    fun delete_data_from_Backend_with_socket(entity: String, option: String){
+        val data = JSONObject()
+        data.put("access_token", accessToken)
+        data.put("entity", entity)
+        data.put("option", option)
+        mSocket.emit("delete_data", data)
+    }
+
 
     private fun handleLoginResponse(success: Boolean) {
         if (success) {
