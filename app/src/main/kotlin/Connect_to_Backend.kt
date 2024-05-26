@@ -129,12 +129,12 @@ class Connect_to_Backend {
         })
     }
 
-    fun mgmt_read_to_Backend_with_socket(entity: String, option: String){
+    fun read_data_from_Backend_with_socket(entity: String, option: String){
         val data = JSONObject()
         data.put("access_token", accessToken)
         data.put("entity", entity)
         data.put("option", option)
-        mSocket.emit("mgmt_read", data)
+        mSocket.emit("read_data", data)
     }
 
     private fun handleLoginResponse(success: Boolean) {

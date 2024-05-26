@@ -60,7 +60,7 @@ public class HouseRActivity extends AppCompatActivity {
                 // Singleton 인스턴스 가져오기
                 Log.d(TAG, "Trying to receive data from backend");
                 backend = Connect_to_Backend.getInstance();
-                backend.mgmt_read_to_Backend_with_socket("Houseinfo_data", "");
+                backend.read_data_from_Backend_with_socket("Houseinfo_data", "");
                 backend.setEventCallback(new EventCallback() {
                     @Override
                     public void onEventReceived(ReceivedDataEvent event) {
