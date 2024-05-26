@@ -51,7 +51,6 @@ public class HouseUActivity extends AppCompatActivity {
                 // Intent를 사용하여 SecondActivity로 전환
                 Intent intent = new Intent(HouseUActivity.this, HouseUActivity1.class);
                 startActivity(intent);
-                setContentView(R.layout.building_listview_activity);
 
                 // Singleton 인스턴스 가져오기
                 backend = Connect_to_Backend.getInstance();

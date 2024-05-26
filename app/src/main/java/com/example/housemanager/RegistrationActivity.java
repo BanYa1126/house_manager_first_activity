@@ -49,7 +49,6 @@ public class RegistrationActivity extends AppCompatActivity {
                 // Intent를 사용하여 SecondActivity로 전환
                 Intent intent = new Intent(RegistrationActivity.this, RegistrationActivity1.class);
                 startActivity(intent);
-                setContentView(R.layout.registeration_activity);
 
                 // Singleton 인스턴스 가져오기
                 backend = Connect_to_Backend.getInstance();

@@ -48,9 +48,8 @@ public class HouseMActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Intent를 사용하여 SecondActivity로 전환
-                Intent intent = new Intent(HouseMActivity.this, HouseMActivity1.class);
+                Intent intent = new Intent(HouseMActivity.this, HouseMActivity2.class);
                 startActivity(intent);
-                setContentView(R.layout.claimmoney_activity_main);
 
                 // Singleton 인스턴스 가져오기
                 backend = Connect_to_Backend.getInstance();
