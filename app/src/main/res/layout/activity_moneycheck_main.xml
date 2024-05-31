@@ -36,12 +36,14 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/usagecheck1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:text="청구일 : "/>
 
                 <TextView
+                    android:id="@+id/usagecheck2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -49,6 +51,7 @@
                     android:text="청구 기간 : "/>
 
                 <TextView
+                    android:id="@+id/usagecheck3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -56,6 +59,7 @@
                     android:text="관리비 : "/>
 
                 <TextView
+                    android:id="@+id/usagecheck4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -63,6 +67,7 @@
                     android:text="미납금 : "/>
 
                 <TextView
+                    android:id="@+id/usagecheck5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -70,6 +75,7 @@
                     android:text="전기 청구액 : "/>
 
                 <TextView
+                    android:id="@+id/usagecheck6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -77,6 +83,7 @@
                     android:text="가스 청구액 : "/>
 
                 <TextView
+                    android:id="@+id/usagecheck7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
@@ -84,6 +91,7 @@
                 android:text="난방 청구액 : "/>
 
                 <TextView
+                    android:id="@+id/usagecheck8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -91,6 +99,7 @@
                     android:text="통신 청구액 : "/>
 
                 <TextView
+                    android:id="@+id/usagecheck9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -98,6 +107,7 @@
                     android:text="수도 청구액 : "/>
 
                 <TextView
+                    android:id="@+id/usagecheck10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -105,6 +115,15 @@
                     android:text="가감액 : "/>
 
                 <TextView
+                    android:id="@+id/usagecheck11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_marginTop="8dp"
+                    android:text="총 청구금액 : "/>
+
+                <TextView
+                    android:id="@+id/usagecheck12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -112,6 +131,7 @@
                     android:text="납입 기한 : "/>
 
                 <TextView
+                    android:id="@+id/usagecheck13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
