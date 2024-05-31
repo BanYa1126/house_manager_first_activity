@@ -23,6 +23,7 @@
             android:gravity="center"
             android:textSize="25sp"/>
         <TextView
+            android:id="@+id/House_Ho"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="호수 정보 : "
@@ -35,6 +36,7 @@
                 android:orientation="vertical"
                 android:padding="5dp">
                 <TextView
+                    android:id="@+id/Eusing"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="전기 사용량 : "
@@ -45,17 +47,20 @@
                     android:orientation="horizontal"
                     android:gravity="center">
                     <EditText
+                        android:id="@+id/Edit_Eusing"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:hint="수정할 전기사용량 값을 입력."
                         android:inputType="numberDecimal" />
                     <Button
+                        android:id="@+id/Ebutton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="수정"
                         android:textSize="17sp" />
                 </LinearLayout>
                 <TextView
+                    android:id="@+id/Gusing"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="가스 사용량 : "
@@ -67,17 +72,20 @@
                     android:orientation="horizontal"
                     android:gravity="center">
                     <EditText
+                        android:id="@+id/Edit_Gusing"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:hint="수정할 가스사용량 값을 입력."
                         android:inputType="numberDecimal" />
                     <Button
+                        android:id="@+id/Gbutton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="수정"
                         android:textSize="17sp" />
                 </LinearLayout>
                 <TextView
+                    android:id="@+id/Husing"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="난방 사용량 : "
@@ -90,17 +98,20 @@
                     android:orientation="horizontal"
                     android:gravity="center">
                     <EditText
+                        android:id="@+id/Edit_Husing"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:hint="수정할 난방사용량 값을 입력."
                         android:inputType="numberDecimal" />
                     <Button
+                        android:id="@+id/Hbutton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="수정"
                         android:textSize="17sp" />
                 </LinearLayout>
                 <TextView
+                    android:id="@+id/Tusing"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="통신 사용량 : "
@@ -112,17 +123,20 @@
                     android:orientation="horizontal"
                     android:gravity="center">
                     <EditText
+                        android:id="@+id/Edit_Tusing"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:hint="수정할 통신사용량 값을 입력."
                         android:inputType="numberDecimal" />
                     <Button
+                        android:id="@+id/Tbutton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="수정"
                         android:textSize="17sp" />
                 </LinearLayout>
                 <TextView
+                    android:id="@+id/Wusing"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="수도 사용량 : "
@@ -134,11 +148,13 @@
                     android:orientation="horizontal"
                     android:gravity="center">
                     <EditText
+                        android:id="@+id/Edit_Wusing"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:hint="수정할 수도사용량 값을 입력."
                         android:inputType="numberDecimal" />
                     <Button
+                        android:id="@+id/Wbutton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="수정"
