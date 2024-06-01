@@ -36,14 +36,14 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/usagecheck1"
+                    android:id="@+id/moneycheck1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:text="청구일 : "/>
 
                 <TextView
-                    android:id="@+id/usagecheck2"
+                    android:id="@+id/moneycheck2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -51,7 +51,7 @@
                     android:text="청구 기간 : "/>
 
                 <TextView
-                    android:id="@+id/usagecheck3"
+                    android:id="@+id/moneycheck3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -59,7 +59,7 @@
                     android:text="관리비 : "/>
 
                 <TextView
-                    android:id="@+id/usagecheck4"
+                    android:id="@+id/moneycheck4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -67,7 +67,7 @@
                     android:text="미납금 : "/>
 
                 <TextView
-                    android:id="@+id/usagecheck5"
+                    android:id="@+id/moneycheck5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -75,7 +75,7 @@
                     android:text="전기 청구액 : "/>
 
                 <TextView
-                    android:id="@+id/usagecheck6"
+                    android:id="@+id/moneycheck6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -83,7 +83,7 @@
                     android:text="가스 청구액 : "/>
 
                 <TextView
-                    android:id="@+id/usagecheck7"
+                    android:id="@+id/moneycheck7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
@@ -91,7 +91,7 @@
                 android:text="난방 청구액 : "/>
 
                 <TextView
-                    android:id="@+id/usagecheck8"
+                    android:id="@+id/moneycheck8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -99,7 +99,7 @@
                     android:text="통신 청구액 : "/>
 
                 <TextView
-                    android:id="@+id/usagecheck9"
+                    android:id="@+id/moneycheck9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -107,7 +107,7 @@
                     android:text="수도 청구액 : "/>
 
                 <TextView
-                    android:id="@+id/usagecheck10"
+                    android:id="@+id/moneycheck10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -115,7 +115,7 @@
                     android:text="가감액 : "/>
 
                 <TextView
-                    android:id="@+id/usagecheck11"
+                    android:id="@+id/moneycheck11"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -123,7 +123,7 @@
                     android:text="총 청구금액 : "/>
 
                 <TextView
-                    android:id="@+id/usagecheck12"
+                    android:id="@+id/moneycheck12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -131,7 +131,7 @@
                     android:text="납입 기한 : "/>
 
                 <TextView
-                    android:id="@+id/usagecheck13"
+                    android:id="@+id/moneycheck13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"

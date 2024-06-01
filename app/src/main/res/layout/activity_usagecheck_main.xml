@@ -37,21 +37,21 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/moneycheck1"
+                    android:id="@+id/usagecheck1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:text="전기 사용량 : "/>
 
                 <TextView
-                    android:id="@+id/moneycheck2"
+                    android:id="@+id/usagecheck2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:text="전기 예상 사용 금액 : "/>
 
                 <TextView
-                    android:id="@+id/moneycheck3"
+                    android:id="@+id/usagecheck3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -59,14 +59,14 @@
                     android:text="가스 사용량 : "/>
 
                 <TextView
-                    android:id="@+id/moneycheck4"
+                    android:id="@+id/usagecheck4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:text="가스 예상 사용 금액 : "/>
 
                 <TextView
-                    android:id="@+id/moneycheck5"
+                    android:id="@+id/usagecheck5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -74,14 +74,14 @@
                     android:text="난방 사용량 : "/>
 
                 <TextView
-                    android:id="@+id/moneycheck6"
+                    android:id="@+id/usagecheck6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:text="난방 예상 사용 금액 : "/>
 
                 <TextView
-                    android:id="@+id/moneycheck7"
+                    android:id="@+id/usagecheck7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -89,7 +89,7 @@
                     android:text="통신 예상 사용 금액 : "/>
 
                 <TextView
-                    android:id="@+id/moneycheck8"
+                    android:id="@+id/usagecheck8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -97,7 +97,7 @@
                     android:text="수도 사용량 : "/>
 
                 <TextView
-                    android:id="@+id/moneycheck9"
+                    android:id="@+id/usagecheck9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
