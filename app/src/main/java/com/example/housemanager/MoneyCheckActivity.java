@@ -54,11 +54,11 @@ public class MoneyCheckActivity extends AppCompatActivity {
             public void onEventReceived(ReceivedDataEvent event) {
                 Log.d(TAG, "Received data: " + event.getMessage());
                 // 받은 데이터의 JSON을 알아서 파싱해서 UI 업데이트 등의 작업 수행
-                parseAndDisplayUsage(event.getMessage());
+                parseAndDisplayMoney(event.getMessage());
             }
         });
     }
-    private void parseAndDisplayUsage(String jsonString) {
+    private void parseAndDisplayMoney(String jsonString) {
         try {
             // JSON 파싱
             JSONObject jsonObject = new JSONObject(jsonString);
