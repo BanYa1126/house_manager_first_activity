@@ -57,25 +57,62 @@ public class UsageCheckActivity extends AppCompatActivity {
                     // JSON 데이터를 로그로 출력하여 확인
                     Log.d(TAG, "JSON_DATA: " + JSON_DATA);
 
-                    JSONObject jsonObject = new JSONObject(JSON_DATA);
-                    JSONArray jsonArray = jsonObject.getJSONArray("JSON_DATA");
+                    // JSON 데이터가 배열 형태인지 확인
+                    JSONArray jsonArray = new JSONArray(JSON_DATA);
 
                     if (jsonArray.length() > 0) {
                         JSONObject dataObject = jsonArray.getJSONObject(0);
 
-                        // 파싱된 데이터를 TextView에 설정
-                        text1.setText(dataObject.getString("UnitId"));
-                        text2.setText(dataObject.getString("MeasurementValue"));
-                        text3.setText(dataObject.getString("MeasurementValue"));
-                        text4.setText(dataObject.getString("MeasurementValue"));
-                        text5.setText(dataObject.getString("MeasurementValue"));
-                        text6.setText(dataObject.getString("MeasurementValue"));
-                        text7.setText(dataObject.getString("MeasurementValue"));
-                        text8.setText(dataObject.getString("MeasurementValue"));
-                        text9.setText(dataObject.getString("MeasurementValue"));
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    // 파싱된 데이터를 TextView에 설정
+                                    String existingText1 = text1.getText().toString();
+                                    String newText1 = existingText1 + " " + dataObject.getString("BillDate");
+                                    text1.setText(newText1);
 
-                        // 나머지 필드도 동일한 방식으로 설정
-                    } else {
+                                    String existingText2 = text2.getText().toString();
+                                    String newText2 = existingText2 + " " + dataObject.getString("PeriodStartDate");
+                                    text2.setText(newText2);
+
+                                    String existingText3 = text3.getText().toString();
+                                    String newText3 = existingText3 + " " + dataObject.getString("ManagementFee");
+                                    text3.setText(newText3);
+
+                                    String existingText4 = text4.getText().toString();
+                                    String newText4 = existingText4 + " " + dataObject.getString("UnpaidAmount");
+                                    text4.setText(newText4);
+
+                                    String existingText5 = text5.getText().toString();
+                                    String newText5 = existingText5 + " " + dataObject.getString("ElectricityBill");
+                                    text5.setText(newText5);
+
+                                    String existingText6 = text6.getText().toString();
+                                    String newText6 = existingText6 + " " + dataObject.getString("GasBill");
+                                    text6.setText(newText6);
+
+                                    String existingText7 = text7.getText().toString();
+                                    String newText7 = existingText7 + " " + dataObject.getString("HeatingBill");
+                                    text7.setText(newText7);
+
+                                    String existingText8 = text8.getText().toString();
+                                    String newText8 = existingText8 + " " + dataObject.getString("CommunicationBill");
+                                    text8.setText(newText8);
+
+                                    String existingText9 = text9.getText().toString();
+                                    String newText9 = existingText9 + " " + dataObject.getString("WaterBill");
+                                    text9.setText(newText9);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                    Log.e(TAG, "JSON parsing error inside UI thread: " + e.getMessage());
+                                }
+                                // 나머지 필드도 동일한 방식으로 설정
+                            }
+                        });
+                    }
+                    else
+                    {
                         Log.d(TAG, "JSON array is empty");
                     }
                 } catch (JSONException e) {
@@ -84,6 +121,5 @@ public class UsageCheckActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 }

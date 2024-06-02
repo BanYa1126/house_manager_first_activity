@@ -65,6 +65,7 @@ public class MoneyCheckActivity extends AppCompatActivity {
 
                     if (jsonArray.length() > 0) {
                         JSONObject dataObject = jsonArray.getJSONObject(0);
+
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -73,6 +74,64 @@ public class MoneyCheckActivity extends AppCompatActivity {
                                     String existingText1 = text1.getText().toString();
                                     String newText1 = existingText1 + " " + dataObject.getString("BillDate");
                                     text1.setText(newText1);
+
+                                    String existingText2 = text2.getText().toString();
+                                    String newText2 = existingText2 + " " + dataObject.getString("PeriodStartDate") + " ~ " + dataObject.getString("PeriodEndDate");
+                                    text2.setText(newText2);
+
+                                    String existingText3 = text3.getText().toString();
+                                    String newText3 = existingText3 + " " + dataObject.getString("ManagementFee");
+                                    text3.setText(newText3);
+
+                                    String existingText4 = text4.getText().toString();
+                                    String newText4 = existingText4 + " " + dataObject.getString("UnpaidAmount");
+                                    text4.setText(newText4);
+
+                                    String existingText5 = text5.getText().toString();
+                                    String newText5 = existingText5 + " " + dataObject.getString("ElectricityBill");
+                                    text5.setText(newText5);
+
+                                    String existingText6 = text6.getText().toString();
+                                    String newText6 = existingText6 + " " + dataObject.getString("GasBill");
+                                    text6.setText(newText6);
+
+                                    String existingText7 = text7.getText().toString();
+                                    String newText7 = existingText7 + " " + dataObject.getString("HeatingBill");
+                                    text7.setText(newText7);
+
+                                    String existingText8 = text8.getText().toString();
+                                    String newText8 = existingText8 + " " + dataObject.getString("CommunicationBill");
+                                    text8.setText(newText8);
+
+                                    String existingText9 = text9.getText().toString();
+                                    String newText9 = existingText9 + " " + dataObject.getString("WaterBill");
+                                    text9.setText(newText9);
+
+                                    String existingText10 = text10.getText().toString();
+                                    String newText10 = existingText10 + " " + dataObject.getString("Adjustment");
+                                    text10.setText(newText10);
+
+                                    int a = dataObject.optInt("ElectricityBill", 0);
+                                    int b = dataObject.optInt("GasBill", 0);
+                                    int c = dataObject.optInt("HeatingBill", 0);
+                                    int d = dataObject.optInt("CommunicationBill", 0);
+                                    int e = dataObject.optInt("WaterBill", 0);
+
+                                    // 총합 계산
+                                    int total_bill = a + b + c + d + e;
+
+                                    String existingText11 = text11.getText().toString();
+                                    String newText11 = existingText11 + " " + total_bill;
+                                    text11.setText(newText11);
+
+                                    String existingText12 = text12.getText().toString();
+                                    String newText12 = existingText12 + " " + dataObject.getString("PaymentDueDate");
+                                    text12.setText(newText12);
+
+                                    String existingText13 = text13.getText().toString();
+                                    String newText13 = existingText13 + " " + dataObject.getString("AIComment");
+                                    text13.setText(newText13);
+
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                     Log.e(TAG, "JSON parsing error inside UI thread: " + e.getMessage());
