@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,19 +20,23 @@ public class UsageCheckActivity extends AppCompatActivity {
     private static final String TAG = "UsageCheckActivity"; // 로그를 구분하기 위한 TAG 설정
     private Connect_to_Backend backend;
 
-    TextView text1 = findViewById(R.id.usagecheck1);
-    TextView text2 = findViewById(R.id.usagecheck2);
-    TextView text3 = findViewById(R.id.usagecheck3);
-    TextView text4 = findViewById(R.id.usagecheck4);
-    TextView text5 = findViewById(R.id.usagecheck5);
-    TextView text6 = findViewById(R.id.usagecheck6);
-    TextView text7 = findViewById(R.id.usagecheck7);
-    TextView text8 = findViewById(R.id.usagecheck8);
-    TextView text9 = findViewById(R.id.usagecheck9);
+    private TextView text1, text2, text3, text4,text5,text6,text7,text8, text9;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usagecheck_main);
+
+        text1 = findViewById(R.id.usagecheck1);
+        text2 = findViewById(R.id.usagecheck2);
+        text3 = findViewById(R.id.usagecheck3);
+        text4 = findViewById(R.id.usagecheck4);
+        text5 = findViewById(R.id.usagecheck5);
+        text6 = findViewById(R.id.usagecheck6);
+        text7 = findViewById(R.id.usagecheck7);
+        text8 = findViewById(R.id.usagecheck8);
+        text9 = findViewById(R.id.usagecheck9);
+
 
         LinearLayout headerEmployer = findViewById(R.id.headerEmployer);
         ImageView imgMenuIcon = findViewById(R.id.imgMenuIcon);
@@ -44,29 +49,37 @@ public class UsageCheckActivity extends AppCompatActivity {
         imgMenuIcon.setOnClickListener(menuClickListener);
 
         backend = Connect_to_Backend.getInstance();
+        backend.read_data_from_Backend_with_socket("UtilUsage_data", "UtilUsage_data.UnitId = unit2", "personal", null);
         backend.setEventCallback(new EventCallback() {
             @Override
             public void onEventReceived(ReceivedDataEvent event) {
                 Log.d(TAG, "Received data: " + event.getMessage());
-                // 받은 데이터의 JSON을 알아서 파싱해서 UI 업데이트 등의 작업 수행
-                parseAndDisplayUsage(event.getMessage());
+                try {
+                    // JSON 데이터는 event에서 받은 메시지라고 가정합니다.
+                    String JSON_DATA = event.getMessage();
+
+                    // JSON 데이터를 로그로 출력하여 확인
+                    Log.d(TAG, "JSON_DATA: " + JSON_DATA);
+
+                    JSONObject jsonObject = new JSONObject(JSON_DATA);
+                    JSONArray jsonArray = jsonObject.getJSONArray("JSON_DATA");
+
+                    if (jsonArray.length() > 0) {
+                        JSONObject dataObject = jsonArray.getJSONObject(0);
+
+                        // 파싱된 데이터를 TextView에 설정
+                        text1.setText(dataObject.getString("UnitId"));
+                        text3.setText(dataObject.getString("MeasurementValue"));
+                        // 나머지 필드도 동일한 방식으로 설정
+                    } else {
+                        Log.d(TAG, "JSON array is empty");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.e(TAG, "JSON parsing error: " + e.getMessage());
+                }
             }
         });
-    }
-    private void parseAndDisplayUsage(String jsonString) {
-        try {
-            // JSON 파싱
-            JSONObject jsonObject = new JSONObject(jsonString);
-            JSONObject usageObject = jsonObject.getJSONObject("usage");
-            int data = usageObject.getInt("data");
-            String unit = usageObject.getString("unit");
 
-            // UI 업데이트
-            String usageText = "Data Usage: " + data + " " + unit;
-            runOnUiThread(() -> text1.setText(usageText));
-            runOnUiThread(() -> text2.setText(usageText));
-        } catch (JSONException e) {
-            Log.e(TAG, "JSON 파싱 오류: " + e.getMessage());
-        }
     }
 }

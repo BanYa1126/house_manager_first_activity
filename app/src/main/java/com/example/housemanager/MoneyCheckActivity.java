@@ -49,29 +49,15 @@ public class MoneyCheckActivity extends AppCompatActivity {
         imgMenuIcon.setOnClickListener(menuClickListener);
 
         backend = Connect_to_Backend.getInstance();
+        backend.read_data_from_Backend_with_socket("Bill_data", "Bill_data.Bill_data = 값", "personal", null);
         backend.setEventCallback(new EventCallback() {
             @Override
             public void onEventReceived(ReceivedDataEvent event) {
                 Log.d(TAG, "Received data: " + event.getMessage());
                 // 받은 데이터의 JSON을 알아서 파싱해서 UI 업데이트 등의 작업 수행
-                parseAndDisplayMoney(event.getMessage());
+
             }
         });
     }
-    private void parseAndDisplayMoney(String jsonString) {
-        try {
-            // JSON 파싱
-            JSONObject jsonObject = new JSONObject(jsonString);
-            JSONObject usageObject = jsonObject.getJSONObject("usage");
-            int data = usageObject.getInt("data");
-            String unit = usageObject.getString("unit");
 
-            // UI 업데이트
-            String usageText = "Data Usage: " + data + " " + unit;
-            runOnUiThread(() -> text1.setText(usageText));
-            runOnUiThread(() -> text2.setText(usageText));
-        } catch (JSONException e) {
-            Log.e(TAG, "JSON 파싱 오류: " + e.getMessage());
-        }
-    }
 }

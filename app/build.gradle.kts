@@ -45,6 +45,7 @@ dependencies {
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("io.socket:socket.io-client:2.1.0") {
         exclude(mapOf("group" to "org.json", "module" to "json"))
+        implementation ("com.google.code.gson:gson:2.8.8")
     }
 }
 

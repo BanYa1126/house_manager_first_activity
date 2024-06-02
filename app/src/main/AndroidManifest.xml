@@ -33,7 +33,6 @@
         <activity android:name=".HouseCActivity"/>
         <activity android:name=".HouseCActivity1"/>
         <activity android:name=".HouseMActivity"/>
-        <activity android:name=".HouseMActivity1"/>
         <activity android:name=".HouseMActivity2"/>
         <activity android:name=".HouseRActivity"/>
         <activity android:name=".HouseRActivity1"/>
