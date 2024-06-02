@@ -139,6 +139,7 @@ class Connect_to_Backend {
         data.put("option", option)
         data.put("data", messageData)
         mSocket.emit("create_data", data)
+        Log.d(TAG, "Emit data: ${data}")
     }
     fun update_data_from_Backend_with_socket(entity: String, where: String?, option: String?, messageData: String?){
         val data = JSONObject()
@@ -148,6 +149,7 @@ class Connect_to_Backend {
         data.put("option", option)
         data.put("data", messageData)
         mSocket.emit("update_data", data)
+        Log.d(TAG, "Emit data: ${data}")
     }
 
     fun read_data_from_Backend_with_socket(entity: String, where: String?, option: String?, messageData: String?){
@@ -158,6 +160,7 @@ class Connect_to_Backend {
         data.put("option", option)
         data.put("data", messageData)
         mSocket.emit("read_data", data)
+        Log.d(TAG, "Emit data: ${data}")
     }
 
     fun delete_data_from_Backend_with_socket(entity: String, where: String?, option: String?, messageData: String?){
@@ -168,6 +171,7 @@ class Connect_to_Backend {
         data.put("option", option)
         data.put("data", messageData)
         mSocket.emit("delete_data", data)
+        Log.d(TAG, "Emit data: ${data}")
     }
 
 
