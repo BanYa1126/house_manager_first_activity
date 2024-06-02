@@ -51,7 +51,7 @@ public class MoneyCheckActivity extends AppCompatActivity {
         TextView text13 = findViewById(R.id.moneycheck13);
 
         backend = Connect_to_Backend.getInstance();
-        backend.read_data_from_Backend_with_socket("Bill_data", "BillId = Bill1", null, null);
+        backend.read_data_from_Backend_with_socket("Bill_data", null, "personal", null);
         backend.setEventCallback(new EventCallback() {
             @Override
             public void onEventReceived(ReceivedDataEvent event) {

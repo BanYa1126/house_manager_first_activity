@@ -45,7 +45,7 @@ public class UsageCheckActivity extends AppCompatActivity {
         imgMenuIcon.setOnClickListener(menuClickListener);
 
         backend = Connect_to_Backend.getInstance();
-        backend.read_data_from_Backend_with_socket("UtilUsage_data", "UnitId = unit2", "personal", null);
+        backend.read_data_from_Backend_with_socket("UtilUsage_data", null, "personal", null);
         backend.setEventCallback(new EventCallback() {
             @Override
             public void onEventReceived(ReceivedDataEvent event) {
