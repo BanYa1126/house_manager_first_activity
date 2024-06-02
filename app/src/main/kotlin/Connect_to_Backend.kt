@@ -84,8 +84,9 @@ class Connect_to_Backend {
     private fun handleReceivedData(args: Array<Any>) {
         if (args.isNotEmpty()) {
             try {
-                val data = args[0] as JSONObject
-                val message = data.getString("JSON_DATA")
+                val dataString = args[0].toString() // 데이터를 문자열로 변환
+                val jsonData = JSONObject(dataString) // 문자열을 JSONObject로 변환
+                val message = jsonData.getString("JSON_DATA")
                 // 받은 데이터를 사용하여 작업 수행
                 Log.d(TAG, "JSON_DATA: $message")
                 eventCallback?.onEventReceived(ReceivedDataEvent(message))
@@ -130,34 +131,42 @@ class Connect_to_Backend {
     }
 
 
-    fun create_data_from_Backend_with_socket(entity: String, option: String){
+    fun create_data_from_Backend_with_socket(entity: String, where: String?, option: String?, messageData: String?){
         val data = JSONObject()
         data.put("access_token", accessToken)
         data.put("entity", entity)
+        data.put("where", where)
         data.put("option", option)
+        data.put("data", messageData)
         mSocket.emit("create_data", data)
     }
-    fun update_data_from_Backend_with_socket(entity: String, option: String){
+    fun update_data_from_Backend_with_socket(entity: String, where: String?, option: String?, messageData: String?){
         val data = JSONObject()
         data.put("access_token", accessToken)
         data.put("entity", entity)
+        data.put("where", where)
         data.put("option", option)
+        data.put("data", messageData)
         mSocket.emit("update_data", data)
     }
 
-    fun read_data_from_Backend_with_socket(entity: String, option: String){
+    fun read_data_from_Backend_with_socket(entity: String, where: String?, option: String?, messageData: String?){
         val data = JSONObject()
         data.put("access_token", accessToken)
         data.put("entity", entity)
+        data.put("where", where)
         data.put("option", option)
+        data.put("data", messageData)
         mSocket.emit("read_data", data)
     }
 
-    fun delete_data_from_Backend_with_socket(entity: String, option: String){
+    fun delete_data_from_Backend_with_socket(entity: String, where: String?, option: String?, messageData: String?){
         val data = JSONObject()
         data.put("access_token", accessToken)
         data.put("entity", entity)
+        data.put("where", where)
         data.put("option", option)
+        data.put("data", messageData)
         mSocket.emit("delete_data", data)
     }
 

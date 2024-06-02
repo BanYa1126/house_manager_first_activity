@@ -46,6 +46,8 @@ public class EmployerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), HouseCheckViewActivity.class);
                 startActivity(intent);
+
+
             }
         });
         ContractButton.setOnClickListener(new View.OnClickListener() {
