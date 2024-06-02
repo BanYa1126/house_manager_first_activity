@@ -47,7 +47,7 @@ public class HouseCActivity extends AppCompatActivity {
         Contract2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), HouseCActivity.class);
+                Intent intent = new Intent(getApplicationContext(), HouseCActivity1.class);
                 startActivity(intent);
             }
         });

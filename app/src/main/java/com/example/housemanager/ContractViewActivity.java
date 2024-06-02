@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 public class ContractViewActivity extends AppCompatActivity {
 
     @Override
