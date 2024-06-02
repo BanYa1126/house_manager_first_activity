@@ -32,7 +32,7 @@ public class HouseCheckViewActivity extends AppCompatActivity {
         // Singleton 인스턴스 가져오기
         backend = Connect_to_Backend.getInstance();
         //backend.read_data_from_Backend_with_socket("Houseinfo_data",null,null,null);
-        backend.read_data_from_Backend_with_socket("Houseinfo_data","UnitId='101-101'",null,null);
+        backend.read_data_from_Backend_with_socket("Houseinfo_data","h.UnitId='unit2'","personal",null);
         backend.setEventCallback(new EventCallback() {
             @Override
             public void onEventReceived(ReceivedDataEvent event) {
