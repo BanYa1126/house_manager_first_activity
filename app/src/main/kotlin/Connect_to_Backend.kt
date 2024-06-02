@@ -133,43 +133,43 @@ class Connect_to_Backend {
 
     fun create_data_from_Backend_with_socket(entity: String, where: String?, option: String?, messageData: String?){
         val data = JSONObject()
-        data.put("access_token", accessToken)
         data.put("entity", entity)
         data.put("where", where)
         data.put("option", option)
         data.put("data", messageData)
+        data.put("access_token", accessToken)
         mSocket.emit("create_data", data)
         Log.d(TAG, "Emit data: ${data}")
     }
     fun update_data_from_Backend_with_socket(entity: String, where: String?, option: String?, messageData: String?){
         val data = JSONObject()
-        data.put("access_token", accessToken)
         data.put("entity", entity)
         data.put("where", where)
         data.put("option", option)
         data.put("data", messageData)
+        data.put("access_token", accessToken)
         mSocket.emit("update_data", data)
         Log.d(TAG, "Emit data: ${data}")
     }
 
     fun read_data_from_Backend_with_socket(entity: String, where: String?, option: String?, messageData: String?){
         val data = JSONObject()
-        data.put("access_token", accessToken)
         data.put("entity", entity)
         data.put("where", where)
         data.put("option", option)
         data.put("data", messageData)
+        data.put("access_token", accessToken)
         mSocket.emit("read_data", data)
         Log.d(TAG, "Emit data: ${data}")
     }
 
     fun delete_data_from_Backend_with_socket(entity: String, where: String?, option: String?, messageData: String?){
         val data = JSONObject()
-        data.put("access_token", accessToken)
         data.put("entity", entity)
         data.put("where", where)
         data.put("option", option)
         data.put("data", messageData)
+        data.put("access_token", accessToken)
         mSocket.emit("delete_data", data)
         Log.d(TAG, "Emit data: ${data}")
     }
