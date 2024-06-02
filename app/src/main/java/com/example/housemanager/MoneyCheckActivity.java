@@ -7,31 +7,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewDebug;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MoneyCheckActivity extends AppCompatActivity {
     private static final String TAG = "MoneyCheckActivity"; // 로그를 구분하기 위한 TAG 설정
     private Connect_to_Backend backend;
-
-    TextView text1 = findViewById(R.id.moneycheck1);
-    TextView text2 = findViewById(R.id.moneycheck2);
-    TextView text3 = findViewById(R.id.moneycheck3);
-    TextView text4 = findViewById(R.id.moneycheck4);
-    TextView text5 = findViewById(R.id.moneycheck5);
-    TextView text6 = findViewById(R.id.moneycheck6);
-    TextView text7 = findViewById(R.id.moneycheck7);
-    TextView text8 = findViewById(R.id.moneycheck8);
-    TextView text9 = findViewById(R.id.moneycheck9);
-    TextView text10 = findViewById(R.id.moneycheck10);
-    TextView text11 = findViewById(R.id.moneycheck11);
-    TextView text12 = findViewById(R.id.moneycheck12);
-    TextView text13 = findViewById(R.id.moneycheck13);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,14 +36,74 @@ public class MoneyCheckActivity extends AppCompatActivity {
         MenuClickListener menuClickListener = new MenuClickListener(this);
         imgMenuIcon.setOnClickListener(menuClickListener);
 
+        TextView text1 = findViewById(R.id.moneycheck1);
+        TextView text2 = findViewById(R.id.moneycheck2);
+        TextView text3 = findViewById(R.id.moneycheck3);
+        TextView text4 = findViewById(R.id.moneycheck4);
+        TextView text5 = findViewById(R.id.moneycheck5);
+        TextView text6 = findViewById(R.id.moneycheck6);
+        TextView text7 = findViewById(R.id.moneycheck7);
+        TextView text8 = findViewById(R.id.moneycheck8);
+        TextView text9 = findViewById(R.id.moneycheck9);
+        TextView text10 = findViewById(R.id.moneycheck10);
+        TextView text11 = findViewById(R.id.moneycheck11);
+        TextView text12 = findViewById(R.id.moneycheck12);
+        TextView text13 = findViewById(R.id.moneycheck13);
+
         backend = Connect_to_Backend.getInstance();
-        backend.read_data_from_Backend_with_socket("Bill_data", "Bill_data.Bill_data = 값", "personal", null);
+        backend.read_data_from_Backend_with_socket("Bill_data", "BillId = Bill1", null, null);
         backend.setEventCallback(new EventCallback() {
             @Override
             public void onEventReceived(ReceivedDataEvent event) {
                 Log.d(TAG, "Received data: " + event.getMessage());
-                // 받은 데이터의 JSON을 알아서 파싱해서 UI 업데이트 등의 작업 수행
+                try {
+                    // JSON 데이터는 event에서 받은 메시지라고 가정합니다.
+                    String JSON_DATA = event.getMessage();
 
+                    // JSON 데이터를 로그로 출력하여 확인
+                    Log.d(TAG, "JSON_DATA: " + JSON_DATA);
+
+                    JSONObject jsonObject = new JSONObject(JSON_DATA);
+                    JSONArray jsonArray = jsonObject.getJSONArray("JSON_DATA");
+
+                    if (jsonArray.length() > 0) {
+                        JSONObject dataObject = jsonArray.getJSONObject(0);
+
+                        int electricityBill = dataObject.getInt("ElectricityBill");
+                        int gasBill = dataObject.getInt("GasBill");
+                        int waterBill = dataObject.getInt("WaterBill");
+                        int totalBill = electricityBill + gasBill + waterBill;
+
+                        // 합산된 값을 문자열로 변환하여 TextView에 설정
+                        String totalBillString = String.valueOf(totalBill);
+
+                        String periodStartDate = dataObject.getString("PeriodStartDate");
+                        String periodEndDate = dataObject.getString("PeriodEndDate");
+                        String period = periodStartDate + "~" + periodEndDate;
+
+                        // 파싱된 데이터를 TextView에 설정
+                        text1.setText(dataObject.getString("BillDate"));
+                        text2.setText(dataObject.getString(period));
+                        text3.setText(dataObject.getString("ManagementFee"));
+                        text4.setText(dataObject.getString("UnpaidAmount"));
+                        text5.setText(dataObject.getString("ElectricityBill"));
+                        text6.setText(dataObject.getString("GasBill"));
+                        text7.setText(dataObject.getString(""));
+                        text8.setText(dataObject.getString(""));
+                        text9.setText(dataObject.getString("WaterBill"));
+                        text10.setText(dataObject.getString(""));
+                        text11.setText(dataObject.getString(totalBillString));
+                        text12.setText(dataObject.getString("PeriodEndDate"));
+                        text13.setText(dataObject.getString(""));
+
+                        // 나머지 필드도 동일한 방식으로 설정
+                    } else {
+                        Log.d(TAG, "JSON array is empty");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.e(TAG, "JSON parsing error: " + e.getMessage());
+                }
             }
         });
     }
