@@ -3,12 +3,9 @@ package com.example.housemanager;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewDebug;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -51,7 +48,7 @@ public class MoneyCheckActivity extends AppCompatActivity {
         TextView text13 = findViewById(R.id.moneycheck13);
 
         backend = Connect_to_Backend.getInstance();
-        backend.read_data_from_Backend_with_socket("Bill_data", null, "personal", null);
+        backend.read_data_from_Backend_with_socket("Bill_data","BillId = 'bill3'","personal",null);
         backend.setEventCallback(new EventCallback() {
             @Override
             public void onEventReceived(ReceivedDataEvent event) {
@@ -63,41 +60,29 @@ public class MoneyCheckActivity extends AppCompatActivity {
                     // JSON 데이터를 로그로 출력하여 확인
                     Log.d(TAG, "JSON_DATA: " + JSON_DATA);
 
-                    JSONObject jsonObject = new JSONObject(JSON_DATA);
-                    JSONArray jsonArray = jsonObject.getJSONArray("JSON_DATA");
+                    // JSON 데이터가 배열 형태인지 확인
+                    JSONArray jsonArray = new JSONArray(JSON_DATA);
 
                     if (jsonArray.length() > 0) {
                         JSONObject dataObject = jsonArray.getJSONObject(0);
-
-                        int electricityBill = dataObject.getInt("ElectricityBill");
-                        int gasBill = dataObject.getInt("GasBill");
-                        int waterBill = dataObject.getInt("WaterBill");
-                        int totalBill = electricityBill + gasBill + waterBill;
-
-                        // 합산된 값을 문자열로 변환하여 TextView에 설정
-                        String totalBillString = String.valueOf(totalBill);
-
-                        String periodStartDate = dataObject.getString("PeriodStartDate");
-                        String periodEndDate = dataObject.getString("PeriodEndDate");
-                        String period = periodStartDate + "~" + periodEndDate;
-
-                        // 파싱된 데이터를 TextView에 설정
-                        text1.setText(dataObject.getString("BillDate"));
-                        text2.setText(dataObject.getString(period));
-                        text3.setText(dataObject.getString("ManagementFee"));
-                        text4.setText(dataObject.getString("UnpaidAmount"));
-                        text5.setText(dataObject.getString("ElectricityBill"));
-                        text6.setText(dataObject.getString("GasBill"));
-                        text7.setText(dataObject.getString(""));
-                        text8.setText(dataObject.getString(""));
-                        text9.setText(dataObject.getString("WaterBill"));
-                        text10.setText(dataObject.getString(""));
-                        text11.setText(dataObject.getString(totalBillString));
-                        text12.setText(dataObject.getString("PeriodEndDate"));
-                        text13.setText(dataObject.getString(""));
-
-                        // 나머지 필드도 동일한 방식으로 설정
-                    } else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    // 파싱된 데이터를 TextView에 설정
+                                    String existingText1 = text1.getText().toString();
+                                    String newText1 = existingText1 + " " + dataObject.getString("BillDate");
+                                    text1.setText(newText1);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                    Log.e(TAG, "JSON parsing error inside UI thread: " + e.getMessage());
+                                }
+                                // 나머지 필드도 동일한 방식으로 설정
+                            }
+                        });
+                    }
+                    else
+                    {
                         Log.d(TAG, "JSON array is empty");
                     }
                 } catch (JSONException e) {
@@ -107,5 +92,4 @@ public class MoneyCheckActivity extends AppCompatActivity {
             }
         });
     }
-
 }
