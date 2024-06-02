@@ -116,9 +116,18 @@ public class MoneyCheckActivity extends AppCompatActivity {
                                     int c = dataObject.optInt("HeatingBill", 0);
                                     int d = dataObject.optInt("CommunicationBill", 0);
                                     int e = dataObject.optInt("WaterBill", 0);
+                                    int f = dataObject.optInt("ManagementFee", 0);
+                                    int h = dataObject.optInt("UnpaidAmount",0);
+
+                                    String data = dataObject.getString("Adjustment");
+
+                                    // 콤마로 구분하여 데이터 나누기
+                                    String[] values = data.split(",");
+
+                                    int g = Integer.parseInt(values[1]);
 
                                     // 총합 계산
-                                    int total_bill = a + b + c + d + e;
+                                    int total_bill = a + b + c + d + e + f + g + h;
 
                                     String existingText11 = text11.getText().toString();
                                     String newText11 = existingText11 + " " + total_bill;
