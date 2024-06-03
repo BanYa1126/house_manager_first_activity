@@ -1,10 +1,12 @@
+package com.example.housemanager;
+
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Calculation {
 
-    public double calculateWaterBill(double consumption) {
+    public static double calculateWaterBill(double consumption) {
         double unitPriceWater = 630;  // 상수도 사용량 단가 (원/m³)
         double waterFeeBase = 850;  // 구경별정액요금 (원)
         double waterFeeUsage = consumption * unitPriceWater;  // 상수도 사용 요금 (원)
@@ -21,7 +23,7 @@ public class Calculation {
         return Math.round(totalFee);
     }
 
-    public String getCurrentSeason() {
+    public static String getCurrentSeason() {
         int month = LocalDateTime.now().getMonthValue();  // 현재 월을 가져옴
         if (month >= 3 && month <= 5) {
             return "spring";
@@ -34,7 +36,7 @@ public class Calculation {
         }
     }
 
-    public double calculateHeatingBill(double pyeong, double heatingUsage) {
+    public static double calculateHeatingBill(double pyeong, double heatingUsage) {
         double PYEONG_TO_SQUARE_METER = 3.3058;
         double BASIC_RATE_PER_SQUARE_METER = 52.4;
 
@@ -58,7 +60,7 @@ public class Calculation {
         return Math.round(totalFee);
     }
 
-    public double calculateGasBill(double consumption) {
+    public static double calculateGasBill(double consumption) {
         double baseRate = 1250;
         double energyConversionFactor = 0.9964;
         double energyContent = 42.772;
@@ -71,7 +73,7 @@ public class Calculation {
         return Math.round(totalFee);
     }
 
-    public double calculateElectricityBill(double totalConsumption) {
+    public static double calculateElectricityBill(double totalConsumption) {
         double baseRate = 0;
         double consumptionTier1 = 0;
         double consumptionTier2 = 0;
