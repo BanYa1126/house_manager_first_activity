@@ -16,6 +16,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+
 public class UsageCheckActivity extends AppCompatActivity {
     private static final String TAG = "UsageCheckActivity"; // 로그를 구분하기 위한 TAG 설정
     private Connect_to_Backend backend;
@@ -67,42 +69,36 @@ public class UsageCheckActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 try {
-                                    // 파싱된 데이터를 TextView에 설정
-                                    String existingText1 = text1.getText().toString();
-                                    String newText1 = existingText1 + " " + dataObject.getString("BillDate");
-                                    text1.setText(newText1);
+                                    HashMap<String, Integer> utilityValues = new HashMap<>();
 
-                                    String existingText2 = text2.getText().toString();
-                                    String newText2 = existingText2 + " " + dataObject.getString("PeriodStartDate");
-                                    text2.setText(newText2);
+                                    for (int i = 0; i < jsonArray.length(); i++) {
+                                        if (jsonArray.length() == 0) {
+                                            break; // 배열의 길이가 0이 되면 반복문 종료
+                                        }
+                                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                        String utilityType = jsonObject.getString("UtilityType");
+                                        int measurementValue = jsonObject.getInt("MeasurementValue");
 
-                                    String existingText3 = text3.getText().toString();
-                                    String newText3 = existingText3 + " " + dataObject.getString("ManagementFee");
-                                    text3.setText(newText3);
+                                        if (utilityValues.containsKey(utilityType)) {
+                                            // 이미 키가 존재할 때 로직
+                                        } else {
+                                            // 키가 없으면 새로 추가
+                                            utilityValues.put(utilityType, measurementValue);
+                                        }
+                                    }
+                                    for (String utilityType : utilityValues.keySet()) {
+                                        int value = utilityValues.get(utilityType);
 
-                                    String existingText4 = text4.getText().toString();
-                                    String newText4 = existingText4 + " " + dataObject.getString("UnpaidAmount");
-                                    text4.setText(newText4);
-
-                                    String existingText5 = text5.getText().toString();
-                                    String newText5 = existingText5 + " " + dataObject.getString("ElectricityBill");
-                                    text5.setText(newText5);
-
-                                    String existingText6 = text6.getText().toString();
-                                    String newText6 = existingText6 + " " + dataObject.getString("GasBill");
-                                    text6.setText(newText6);
-
-                                    String existingText7 = text7.getText().toString();
-                                    String newText7 = existingText7 + " " + dataObject.getString("HeatingBill");
-                                    text7.setText(newText7);
-
-                                    String existingText8 = text8.getText().toString();
-                                    String newText8 = existingText8 + " " + dataObject.getString("CommunicationBill");
-                                    text8.setText(newText8);
-
-                                    String existingText9 = text9.getText().toString();
-                                    String newText9 = existingText9 + " " + dataObject.getString("WaterBill");
-                                    text9.setText(newText9);
+                                        if (utilityType.equals("Electricity")) {
+                                            text1.setText(text1.getText().toString() + " " + value);
+                                        }else if (utilityType.equals("Gas")) {
+                                            text3.setText(text3.getText().toString() + " " + value);
+                                        } else if (utilityType.equals("Heating")) {
+                                            text5.setText(text5.getText().toString() + " " + value);
+                                        } else if (utilityType.equals("Water")) {
+                                            text8.setText(text8.getText().toString() + " " + value);
+                                        }
+                                    }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                     Log.e(TAG, "JSON parsing error inside UI thread: " + e.getMessage());

@@ -48,7 +48,7 @@ public class MoneyCheckActivity extends AppCompatActivity {
         TextView text13 = findViewById(R.id.moneycheck13);
 
         backend = Connect_to_Backend.getInstance();
-        backend.read_data_from_Backend_with_socket("Bill_data","BillId = 'bill3'","personal",null);
+        backend.read_data_from_Backend_with_socket("Bill_data",null,"personal",null);
         backend.setEventCallback(new EventCallback() {
             @Override
             public void onEventReceived(ReceivedDataEvent event) {
@@ -71,45 +71,27 @@ public class MoneyCheckActivity extends AppCompatActivity {
                             public void run() {
                                 try {
                                     // 파싱된 데이터를 TextView에 설정
-                                    String existingText1 = text1.getText().toString();
-                                    String newText1 = existingText1 + " " + dataObject.getString("BillDate");
-                                    text1.setText(newText1);
+                                    text1.setText(text1.getText().toString() + " " + dataObject.getString("BillDate"));
 
                                     String existingText2 = text2.getText().toString();
                                     String newText2 = existingText2 + " " + dataObject.getString("PeriodStartDate") + " ~ " + dataObject.getString("PeriodEndDate");
                                     text2.setText(newText2);
 
-                                    String existingText3 = text3.getText().toString();
-                                    String newText3 = existingText3 + " " + dataObject.getString("ManagementFee");
-                                    text3.setText(newText3);
+                                    text3.setText(text3.getText().toString()+ " " + dataObject.getString("ManagementFee"));
 
-                                    String existingText4 = text4.getText().toString();
-                                    String newText4 = existingText4 + " " + dataObject.getString("UnpaidAmount");
-                                    text4.setText(newText4);
+                                    text4.setText(text4.getText().toString()+ " " + dataObject.getString("UnpaidAmount"));
 
-                                    String existingText5 = text5.getText().toString();
-                                    String newText5 = existingText5 + " " + dataObject.getString("ElectricityBill");
-                                    text5.setText(newText5);
+                                    text5.setText(text5.getText().toString()+ " " + dataObject.getString("ElectricityBill"));
 
-                                    String existingText6 = text6.getText().toString();
-                                    String newText6 = existingText6 + " " + dataObject.getString("GasBill");
-                                    text6.setText(newText6);
+                                    text6.setText(text6.getText().toString()+ " " + dataObject.getString("GasBill"));
 
-                                    String existingText7 = text7.getText().toString();
-                                    String newText7 = existingText7 + " " + dataObject.getString("HeatingBill");
-                                    text7.setText(newText7);
+                                    text7.setText(text7.getText().toString() + " " + dataObject.getString("HeatingBill"));
 
-                                    String existingText8 = text8.getText().toString();
-                                    String newText8 = existingText8 + " " + dataObject.getString("CommunicationBill");
-                                    text8.setText(newText8);
+                                    text8.setText(text8.getText().toString()+ " " + dataObject.getString("CommunicationBill"));
 
-                                    String existingText9 = text9.getText().toString();
-                                    String newText9 = existingText9 + " " + dataObject.getString("WaterBill");
-                                    text9.setText(newText9);
+                                    text9.setText(text9.getText().toString() + " " + dataObject.getString("WaterBill"));
 
-                                    String existingText10 = text10.getText().toString();
-                                    String newText10 = existingText10 + " " + dataObject.getString("Adjustment");
-                                    text10.setText(newText10);
+                                    text10.setText(text10.getText().toString()+ " " + dataObject.getString("Adjustment"));
 
                                     int a = dataObject.optInt("ElectricityBill", 0);
                                     int b = dataObject.optInt("GasBill", 0);
@@ -129,17 +111,11 @@ public class MoneyCheckActivity extends AppCompatActivity {
                                     // 총합 계산
                                     int total_bill = a + b + c + d + e + f + g + h;
 
-                                    String existingText11 = text11.getText().toString();
-                                    String newText11 = existingText11 + " " + total_bill;
-                                    text11.setText(newText11);
+                                    text11.setText(text11.getText().toString()+ " " + total_bill);
 
-                                    String existingText12 = text12.getText().toString();
-                                    String newText12 = existingText12 + " " + dataObject.getString("PaymentDueDate");
-                                    text12.setText(newText12);
+                                    text12.setText(text12.getText().toString() + " " + dataObject.getString("PaymentDueDate"));
 
-                                    String existingText13 = text13.getText().toString();
-                                    String newText13 = existingText13 + " " + dataObject.getString("AIComment");
-                                    text13.setText(newText13);
+                                    text13.setText(text13.getText().toString() + " " + dataObject.getString("AIComment"));
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
