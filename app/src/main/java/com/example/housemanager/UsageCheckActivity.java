@@ -90,15 +90,20 @@ public class UsageCheckActivity extends AppCompatActivity {
                                         int value = utilityValues.get(utilityType);
 
                                         if (utilityType.equals("Electricity")) {
-                                            text1.setText(text1.getText().toString() + " " + value);
+                                            text1.setText(text1.getText().toString() + " " + value + " W");
+                                            text2.setText(text2.getText().toString() + " " + (int)ElectricityCalculator.calculateElectricityBill(value) + "원");
                                         }else if (utilityType.equals("Gas")) {
-                                            text3.setText(text3.getText().toString() + " " + value);
+                                            text3.setText(text3.getText().toString() + " " + value + " L");
+                                            text4.setText(text4.getText().toString() + " ");
                                         } else if (utilityType.equals("Heating")) {
-                                            text5.setText(text5.getText().toString() + " " + value);
+                                            text5.setText(text5.getText().toString() + " " + value + " H");
+                                            text6.setText(text6.getText().toString() + " ");
                                         } else if (utilityType.equals("Water")) {
-                                            text8.setText(text8.getText().toString() + " " + value);
+                                            text8.setText(text8.getText().toString() + " " + value + " L");
+                                            text9.setText(text9.getText().toString() + " ");
                                         }
                                     }
+                                    text7.setText(text7.getText().toString() + " " + 20000+"원");
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                     Log.e(TAG, "JSON parsing error inside UI thread: " + e.getMessage());

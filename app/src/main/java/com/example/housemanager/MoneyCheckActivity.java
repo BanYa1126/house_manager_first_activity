@@ -77,21 +77,21 @@ public class MoneyCheckActivity extends AppCompatActivity {
                                     String newText2 = existingText2 + " " + dataObject.getString("PeriodStartDate") + " ~ " + dataObject.getString("PeriodEndDate");
                                     text2.setText(newText2);
 
-                                    text3.setText(text3.getText().toString()+ " " + dataObject.getString("ManagementFee"));
+                                    text3.setText(text3.getText().toString()+ " " + dataObject.getString("ManagementFee") + "원");
 
-                                    text4.setText(text4.getText().toString()+ " " + dataObject.getString("UnpaidAmount"));
+                                    text4.setText(text4.getText().toString()+ " " + dataObject.getString("UnpaidAmount") + "원");
 
-                                    text5.setText(text5.getText().toString()+ " " + dataObject.getString("ElectricityBill"));
+                                    text5.setText(text5.getText().toString()+ " " + dataObject.getString("ElectricityBill") + "원");
 
-                                    text6.setText(text6.getText().toString()+ " " + dataObject.getString("GasBill"));
+                                    text6.setText(text6.getText().toString()+ " " + dataObject.getString("GasBill") + "원");
 
-                                    text7.setText(text7.getText().toString() + " " + dataObject.getString("HeatingBill"));
+                                    text7.setText(text7.getText().toString() + " " + dataObject.getString("HeatingBill") + "원");
 
-                                    text8.setText(text8.getText().toString()+ " " + dataObject.getString("CommunicationBill"));
+                                    text8.setText(text8.getText().toString()+ " " + dataObject.getString("CommunicationBill") + "원");
 
-                                    text9.setText(text9.getText().toString() + " " + dataObject.getString("WaterBill"));
+                                    text9.setText(text9.getText().toString() + " " + dataObject.getString("WaterBill") + "원");
 
-                                    text10.setText(text10.getText().toString()+ " " + dataObject.getString("Adjustment"));
+                                    text10.setText(text10.getText().toString()+ " " + dataObject.getString("Adjustment") + "원");
 
                                     int a = dataObject.optInt("ElectricityBill", 0);
                                     int b = dataObject.optInt("GasBill", 0);
@@ -111,7 +111,7 @@ public class MoneyCheckActivity extends AppCompatActivity {
                                     // 총합 계산
                                     int total_bill = a + b + c + d + e + f + g + h;
 
-                                    text11.setText(text11.getText().toString()+ " " + total_bill);
+                                    text11.setText(text11.getText().toString()+ " " + total_bill + "원");
 
                                     text12.setText(text12.getText().toString() + " " + dataObject.getString("PaymentDueDate"));
 
