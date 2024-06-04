@@ -137,7 +137,7 @@ public class UsageCheckActivity extends AppCompatActivity {
                         Log.d(TAG, "UtilUsage_data: " + utilUsageData.toString());
 
                         // Houseinfo_data 요청 후 처리
-                        backend.read_data_from_Backend_with_socket("Houseinfo_data", null, "personal", null);
+                        backend.read_data_from_Backend_with_socket("Houseinfo_data", null, null,"personal", null);
                         backend.setEventCallback(new EventCallback() {
                             @Override
                             public void onEventReceived(ReceivedDataEvent event) {

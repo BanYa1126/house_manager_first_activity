@@ -166,14 +166,6 @@ class Connect_to_Backend {
         Log.d(TAG, "Emit data: ${data}")
     }
 
-    fun read_data_from_Backend_with_socket(entity: String, property: String?=null, where: String?=null, option: String?=null){
-        read_data_from_Backend_with_socket(entity,property,where,option,null);
-    }
-    fun read_data_from_Backend_with_socket(entity: String, property: String?=null, where: String?=null){
-        read_data_from_Backend_with_socket(entity,property,where,null,null);
-    }
-
-
     fun delete_data_from_Backend_with_socket(entity: String, property: String?=null, where: String?=null, option: String?=null, messageData: String?=null){
         val data = JSONObject()
         data.put("entity", entity)
