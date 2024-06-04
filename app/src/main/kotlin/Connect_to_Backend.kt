@@ -166,7 +166,7 @@ class Connect_to_Backend {
         Log.d(TAG, "Emit data: ${data}")
     }
 
-    fun delete_data_from_Backend_with_socket(entity: String, property: String?, where: String?, option: String?, messageData: String?){
+    fun delete_data_from_Backend_with_socket(entity: String, property: String?=null, where: String?=null, option: String?=null, messageData: String?=null){
         val data = JSONObject()
         data.put("entity", entity)
         data.put("property", property)
