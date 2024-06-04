@@ -131,9 +131,10 @@ class Connect_to_Backend {
     }
 
 
-    fun create_data_from_Backend_with_socket(entity: String, where: String?, option: String?, messageData: String?){
+    fun create_data_from_Backend_with_socket(entity: String, property: String?, where: String?, option: String?, messageData: String?){
         val data = JSONObject()
         data.put("entity", entity)
+        data.put("property", property)
         data.put("where", where)
         data.put("option", option)
         data.put("data", messageData)
@@ -141,9 +142,10 @@ class Connect_to_Backend {
         mSocket.emit("create_data", data)
         Log.d(TAG, "Emit data: ${data}")
     }
-    fun update_data_from_Backend_with_socket(entity: String, where: String?, option: String?, messageData: String?){
+    fun update_data_from_Backend_with_socket(entity: String, property: String?, where: String?, option: String?, messageData: String?){
         val data = JSONObject()
         data.put("entity", entity)
+        data.put("property", property)
         data.put("where", where)
         data.put("option", option)
         data.put("data", messageData)
@@ -152,9 +154,10 @@ class Connect_to_Backend {
         Log.d(TAG, "Emit data: ${data}")
     }
 
-    fun read_data_from_Backend_with_socket(entity: String, where: String?, option: String?, messageData: String?){
+    fun read_data_from_Backend_with_socket(entity: String, property: String?, where: String?, option: String?, messageData: String?){
         val data = JSONObject()
         data.put("entity", entity)
+        data.put("property", property)
         data.put("where", where)
         data.put("option", option)
         data.put("data", messageData)
@@ -163,9 +166,10 @@ class Connect_to_Backend {
         Log.d(TAG, "Emit data: ${data}")
     }
 
-    fun delete_data_from_Backend_with_socket(entity: String, where: String?, option: String?, messageData: String?){
+    fun delete_data_from_Backend_with_socket(entity: String, property: String?, where: String?, option: String?, messageData: String?){
         val data = JSONObject()
         data.put("entity", entity)
+        data.put("property", property)
         data.put("where", where)
         data.put("option", option)
         data.put("data", messageData)
