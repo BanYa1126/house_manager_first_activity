@@ -3,26 +3,24 @@ package com.example.housemanager;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 public class HouseUActivity extends AppCompatActivity {
 
     private static final String TAG = "HouseUActivity";
     private Connect_to_Backend backend;
+    private ListView listView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,16 +37,55 @@ public class HouseUActivity extends AppCompatActivity {
         MenuClickListener menuClickListener = new MenuClickListener(this);
         imgMenuIcon.setOnClickListener(menuClickListener);
 
-        ListView listView = findViewById(R.id.building_listview);
+        listView = findViewById(R.id.building_listview);
 
-        backend.read_data_from_Backend_with_socket("Houseinfo_data", null, null, null, null);
-        // 표시할 단일 데이터
-        String[] data = {};
+        // Null check
+        if (listView == null) {
+            Log.e(TAG, "ListView is null!");
+            return;
+        }
 
-        CustomAdapter2 adapter2 = new CustomAdapter2(this, data);
+        // Singleton 인스턴스 가져오기
+        backend = Connect_to_Backend.getInstance();
+        if (backend == null) {
+            Log.e(TAG, "Backend instance is null!");
+            return;
+        }
 
-        // ListView에 어댑터 설정
-        listView.setAdapter(adapter2);
+        // 백엔드로부터 데이터 요청
+        try {
+            backend.read_data_from_Backend_with_socket("Houseinfo_data", null, null, null, null);
+        } catch (Exception e) {
+            Log.e(TAG, "Error reading data from backend: " + e.getMessage());
+        }
+
+        backend.setEventCallback(new EventCallback() {
+            @Override
+            public void onEventReceived(ReceivedDataEvent event) {
+                String jsonData = event.getMessage();
+                Log.d(TAG, "Received data: " + jsonData);
+
+                try {
+                    JSONArray jsonArray = new JSONArray(jsonData);
+                    String[] houseInfoArray = new String[jsonArray.length()];
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        houseInfoArray[i] = jsonObject.getString("UnitId");
+                    }
+                    // 데이터가 올바르게 파싱되었는지 로그 출력
+                    for (String info : houseInfoArray) {
+                        Log.d(TAG, "House Info: " + info);
+                    }
+                    // 새로운 어댑터 생성
+                    CustomAdapter2 newAdapter = new CustomAdapter2(HouseUActivity.this, houseInfoArray);
+                    // 새로운 어댑터 설정
+                    listView.setAdapter(newAdapter);
+                    Log.d(TAG, "Adapter set with new data");
+                } catch (JSONException e) {
+                    Log.e(TAG, "JSON parsing error: " + e.getMessage());
+                }
+            }
+        });
 
         // ListView 아이템 클릭 리스너 설정
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -57,36 +94,6 @@ public class HouseUActivity extends AppCompatActivity {
                 // Intent를 사용하여 SecondActivity로 전환
                 Intent intent = new Intent(HouseUActivity.this, HouseUActivity1.class);
                 startActivity(intent);
-
-                // Singleton 인스턴스 가져오기
-                backend = Connect_to_Backend.getInstance();
-                backend.setEventCallback(new EventCallback() {
-                    @Override
-                    public void onEventReceived(ReceivedDataEvent event) {
-                        Log.d(TAG, "Received data: " + event.getMessage());
-                        // 받은 데이터의 JSON을 알아서 파싱해서 UI 업데이트 등의 작업 수행
-                        // JSON 데이터를 파싱하여 String 배열로 변환하는 로직
-                        String jsonData = event.getMessage();
-                        try {
-
-                            JSONArray jsonArray = new JSONArray(jsonData);
-                            String[] houseInfoArray = new String[jsonArray.length()];
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                houseInfoArray[i] = jsonArray.getString(i);
-                            }
-                            // 어댑터 데이터 업데이트
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    CustomAdapter2 newAdapter = new CustomAdapter2(HouseUActivity.this, houseInfoArray);
-                                    listView.setAdapter(newAdapter);
-                                }
-                            });
-                        } catch (JSONException e) {
-                            Log.e(TAG, "JSON parsing error: " + e.getMessage());
-                        }
-                    }
-                });
             }
         });
     }
