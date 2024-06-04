@@ -28,8 +28,8 @@ public class HouseRActivity1 extends AppCompatActivity {
         EditText text8 = findViewById(R.id.houseR8);
         EditText text9 = findViewById(R.id.houseR9);
         EditText text10 = findViewById(R.id.houseR10);
-        Button randombtn = findViewById(R.id.PWRandomButton);
-        Button regbtn = findViewById(R.id.PRButton);
+        Button Randombtn = findViewById(R.id.PWRandomButton);
+        Button Regbtn = findViewById(R.id.PRButton);
 
         LinearLayout headerAdmin = findViewById(R.id.headerAdmin);
         ImageView imgMenuIcon = findViewById(R.id.imgMenuIcon);
