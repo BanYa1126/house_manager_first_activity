@@ -15,10 +15,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
 public class HouseUActivity extends AppCompatActivity {
 
     private static final String TAG = "HouseUActivity";
     private Connect_to_Backend backend;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +41,9 @@ public class HouseUActivity extends AppCompatActivity {
 
         ListView listView = findViewById(R.id.building_listview);
 
+        backend.read_data_from_Backend_with_socket("Houseinfo_data", null, null, null, null);
         // 표시할 단일 데이터
-        String[] data = {"101", "102", "103", "104", "201"};
+        String[] data = {};
 
         CustomAdapter2 adapter2 = new CustomAdapter2(this, data);
 
@@ -59,6 +65,26 @@ public class HouseUActivity extends AppCompatActivity {
                     public void onEventReceived(ReceivedDataEvent event) {
                         Log.d(TAG, "Received data: " + event.getMessage());
                         // 받은 데이터의 JSON을 알아서 파싱해서 UI 업데이트 등의 작업 수행
+                        // JSON 데이터를 파싱하여 String 배열로 변환하는 로직
+                        String jsonData = event.getMessage();
+                        try {
+                            String utilId = jsonObject.getString("UtilId");
+                            JSONArray jsonArray = new JSONArray(jsonData);
+                            String[] houseInfoArray = new String[jsonArray.length()];
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                houseInfoArray[i] = jsonArray.getString(i);
+                            }
+                            // 어댑터 데이터 업데이트
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    CustomAdapter2 newAdapter = new CustomAdapter2(HouseUActivity.this, houseInfoArray);
+                                    listView.setAdapter(newAdapter);
+                                }
+                            });
+                        } catch (JSONException e) {
+                            Log.e(TAG, "JSON parsing error: " + e.getMessage());
+                        }
                     }
                 });
             }

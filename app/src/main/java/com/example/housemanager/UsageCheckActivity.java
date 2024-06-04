@@ -77,12 +77,12 @@ public class UsageCheckActivity extends AppCompatActivity {
                                             @Override
                                             public void run() {
                                                 try {
-                                                    HashMap<String, Integer> utilityValues = new HashMap<>();
+                                                    HashMap<String, Double> utilityValues = new HashMap<>();
                                                     for (int i = 0; i < utilUsageData.length(); i++) {
                                                         JSONObject jsonObject = utilUsageData.getJSONObject(i);
                                                         if (jsonObject.has("UtilityType") && jsonObject.has("MeasurementValue")) {
                                                             String utilityType = jsonObject.getString("UtilityType");
-                                                            int measurementValue = jsonObject.getInt("MeasurementValue");
+                                                            double measurementValue = jsonObject.getDouble("MeasurementValue");
                                                             Log.d(TAG, "UtilityType: " + utilityType + ", MeasurementValue: " + measurementValue);
 
                                                             if (!utilityValues.containsKey(utilityType)) {
@@ -100,19 +100,19 @@ public class UsageCheckActivity extends AppCompatActivity {
                                                         switch (utilityType) {
                                                             case "Electricity":
                                                                 text1.setText(text1.getText().toString() + " " + value + " W");
-                                                                text2.setText(text2.getText().toString() + " " + (int) Calculation.calculateElectricityBill(value) + "원");
+                                                                text2.setText(text2.getText().toString() + " " + Calculation.calculateElectricityBill(value) + "원");
                                                                 break;
                                                             case "Gas":
                                                                 text3.setText(text3.getText().toString() + " " + value + " L");
-                                                                text4.setText(text4.getText().toString() + " " + (int) Calculation.calculateGasBill(value) + "원");
+                                                                text4.setText(text4.getText().toString() + " " + Calculation.calculateGasBill(value) + "원");
                                                                 break;
                                                             case "Heating":
-                                                                text5.setText(text5.getText().toString() + " " + value + " H");
-                                                                text6.setText(text6.getText().toString() + " " + (int) Calculation.calculateHeatingBill(rentalArea, value) + "원");
+                                                                text5.setText(text5.getText().toString() + " " + (value*1000)  + " Kcal");
+                                                                text6.setText(text6.getText().toString() + " " + Calculation.calculateHeatingBill(rentalArea, value) + "원");
                                                                 break;
                                                             case "Water":
                                                                 text8.setText(text8.getText().toString() + " " + value + " L");
-                                                                text9.setText(text9.getText().toString() + " " + (int) Calculation.calculateWaterBill(value) + "원");
+                                                                text9.setText(text9.getText().toString() + " " + Calculation.calculateWaterBill(value) + "원");
                                                                 break;
                                                             default:
                                                                 break;
@@ -154,12 +154,12 @@ public class UsageCheckActivity extends AppCompatActivity {
                                             @Override
                                             public void run() {
                                                 try {
-                                                    HashMap<String, Integer> utilityValues = new HashMap<>();
+                                                    HashMap<String, Double> utilityValues = new HashMap<>();
                                                     for (int i = 0; i < utilUsageData.length(); i++) {
                                                         JSONObject jsonObject = utilUsageData.getJSONObject(i);
                                                         if (jsonObject.has("UtilityType") && jsonObject.has("MeasurementValue")) {
                                                             String utilityType = jsonObject.getString("UtilityType");
-                                                            int measurementValue = jsonObject.getInt("MeasurementValue");
+                                                            double measurementValue = jsonObject.getDouble("MeasurementValue");
                                                             Log.d(TAG, "UtilityType: " + utilityType + ", MeasurementValue: " + measurementValue);
 
                                                             if (!utilityValues.containsKey(utilityType)) {
@@ -177,19 +177,19 @@ public class UsageCheckActivity extends AppCompatActivity {
                                                         switch (utilityType) {
                                                             case "Electricity":
                                                                 text1.setText(text1.getText().toString() + " " + value + " W");
-                                                                text2.setText(text2.getText().toString() + " " + (int) Calculation.calculateElectricityBill(value) + "원");
+                                                                text2.setText(text2.getText().toString() + " " + Calculation.calculateElectricityBill(value) + "원");
                                                                 break;
                                                             case "Gas":
                                                                 text3.setText(text3.getText().toString() + " " + value + " L");
-                                                                text4.setText(text4.getText().toString() + " " + (int) Calculation.calculateGasBill(value) + "원");
+                                                                text4.setText(text4.getText().toString() + " " + Calculation.calculateGasBill(value) + "원");
                                                                 break;
                                                             case "Heating":
-                                                                text5.setText(text5.getText().toString() + " " + value + " H");
-                                                                text6.setText(text6.getText().toString() + " " + (int) Calculation.calculateHeatingBill(rentalArea, value) + "원");
+                                                                text5.setText(text5.getText().toString() + " " + (value*1000) + " Kcal");
+                                                                text6.setText(text6.getText().toString() + " " + Calculation.calculateHeatingBill(rentalArea, value) + "원");
                                                                 break;
                                                             case "Water":
                                                                 text8.setText(text8.getText().toString() + " " + value + " L");
-                                                                text9.setText(text9.getText().toString() + " " + (int) Calculation.calculateWaterBill(value) + "원");
+                                                                text9.setText(text9.getText().toString() + " " + Calculation.calculateWaterBill(value) + "원");
                                                                 break;
                                                             default:
                                                                 break;
