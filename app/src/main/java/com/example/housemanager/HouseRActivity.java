@@ -56,18 +56,6 @@ public class HouseRActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), HouseRActivity.class);
                 startActivity(intent);
-
-                // Singleton 인스턴스 가져오기
-                Log.d(TAG, "Trying to receive data from backend");
-                backend = Connect_to_Backend.getInstance();
-                backend.read_data_from_Backend_with_socket("Houseinfo_data",null,null,null);
-                backend.setEventCallback(new EventCallback() {
-                    @Override
-                    public void onEventReceived(ReceivedDataEvent event) {
-                        Log.d(TAG, "Received data: " + event.getMessage());
-                        // 받은 데이터의 JSON을 알아서 파싱해서 UI 업데이트 등의 작업 수행
-                    }
-                });
             }
         });
     }
