@@ -107,7 +107,7 @@ public class UsageCheckActivity extends AppCompatActivity {
                                                                 text4.setText(text4.getText().toString() + " " + Calculation.calculateGasBill(value) + "원");
                                                                 break;
                                                             case "Heating":
-                                                                text5.setText(text5.getText().toString() + " " + (value*1000)  + " Kcal");
+                                                                text5.setText(text5.getText().toString() + " " + (value*1000)  + " Mcal");
                                                                 text6.setText(text6.getText().toString() + " " + Calculation.calculateHeatingBill(rentalArea, value) + "원");
                                                                 break;
                                                             case "Water":
@@ -184,7 +184,7 @@ public class UsageCheckActivity extends AppCompatActivity {
                                                                 text4.setText(text4.getText().toString() + " " + Calculation.calculateGasBill(value) + "원");
                                                                 break;
                                                             case "Heating":
-                                                                text5.setText(text5.getText().toString() + " " + (value*1000) + " Kcal");
+                                                                text5.setText(text5.getText().toString() + " " + (value*1000) + " Mcal");
                                                                 text6.setText(text6.getText().toString() + " " + Calculation.calculateHeatingBill(rentalArea, value) + "원");
                                                                 break;
                                                             case "Water":

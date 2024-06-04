@@ -68,7 +68,7 @@ public class HouseUActivity extends AppCompatActivity {
                         // JSON 데이터를 파싱하여 String 배열로 변환하는 로직
                         String jsonData = event.getMessage();
                         try {
-                            String utilId = jsonObject.getString("UtilId");
+
                             JSONArray jsonArray = new JSONArray(jsonData);
                             String[] houseInfoArray = new String[jsonArray.length()];
                             for (int i = 0; i < jsonArray.length(); i++) {
