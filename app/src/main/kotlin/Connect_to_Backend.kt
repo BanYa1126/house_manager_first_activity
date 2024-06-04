@@ -131,7 +131,7 @@ class Connect_to_Backend {
     }
 
 
-    fun create_data_from_Backend_with_socket(entity: String, property: String?, where: String?, option: String?, messageData: String?){
+    fun create_data_from_Backend_with_socket(entity: String, property: String?=null, where: String?=null, option: String?=null, messageData: String?=null){
         val data = JSONObject()
         data.put("entity", entity)
         data.put("property", property)
@@ -142,7 +142,7 @@ class Connect_to_Backend {
         mSocket.emit("create_data", data)
         Log.d(TAG, "Emit data: ${data}")
     }
-    fun update_data_from_Backend_with_socket(entity: String, property: String?, where: String?, option: String?, messageData: String?){
+    fun update_data_from_Backend_with_socket(entity: String, property: String?=null, where: String?=null, option: String?=null, messageData: String?=null){
         val data = JSONObject()
         data.put("entity", entity)
         data.put("property", property)
@@ -154,7 +154,7 @@ class Connect_to_Backend {
         Log.d(TAG, "Emit data: ${data}")
     }
 
-    fun read_data_from_Backend_with_socket(entity: String, property: String?, where: String?, option: String?, messageData: String?){
+    fun read_data_from_Backend_with_socket(entity: String, property: String?=null, where: String?=null, option: String?=null, messageData: String?=null){
         val data = JSONObject()
         data.put("entity", entity)
         data.put("property", property)
@@ -165,6 +165,14 @@ class Connect_to_Backend {
         mSocket.emit("read_data", data)
         Log.d(TAG, "Emit data: ${data}")
     }
+
+    fun read_data_from_Backend_with_socket(entity: String, property: String?=null, where: String?=null, option: String?=null){
+        read_data_from_Backend_with_socket(entity,property,where,option,null);
+    }
+    fun read_data_from_Backend_with_socket(entity: String, property: String?=null, where: String?=null){
+        read_data_from_Backend_with_socket(entity,property,where,null,null);
+    }
+
 
     fun delete_data_from_Backend_with_socket(entity: String, property: String?=null, where: String?=null, option: String?=null, messageData: String?=null){
         val data = JSONObject()
