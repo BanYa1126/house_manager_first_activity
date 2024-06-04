@@ -41,10 +41,10 @@ public class Calculation {
         double BASIC_RATE_PER_SQUARE_METER = 52.4;
 
         Map<String, Double> SEASON_RATES = new HashMap<>();
-        SEASON_RATES.put("spring", 99.51);
-        SEASON_RATES.put("summer", 89.55);
-        SEASON_RATES.put("fall", 104.53);
-        SEASON_RATES.put("winter", 101.57);
+        SEASON_RATES.put("spring", 9951.0);
+        SEASON_RATES.put("summer", 8955.0);
+        SEASON_RATES.put("fall", 10453.0);
+        SEASON_RATES.put("winter", 10157.0);
 
         String season = getCurrentSeason();
 
@@ -52,7 +52,7 @@ public class Calculation {
         double basicFee = contractArea * BASIC_RATE_PER_SQUARE_METER;
 
         double usageRate = SEASON_RATES.get(season);
-        double usageFee = heatingUsage * usageRate * 101570;
+        double usageFee = heatingUsage * usageRate;// * 101570;
 
         double vat = (basicFee + usageFee) * 0.1;
         double totalFee = basicFee + usageFee + vat;
