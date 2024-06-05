@@ -56,7 +56,7 @@ public class HouseUActivity extends AppCompatActivity {
                             try {
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                    houseInfoArray[i] = jsonObject.getString("UnitId");
+                                    houseInfoArray[i] = jsonObject.getString("RoomNumber");
                                 }
                                 // 새로운 어댑터 생성
                                 CustomAdapter2 newAdapter = new CustomAdapter2(HouseUActivity.this, houseInfoArray);
