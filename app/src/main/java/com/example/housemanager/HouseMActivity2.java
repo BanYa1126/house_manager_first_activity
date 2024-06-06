@@ -17,7 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 public class HouseMActivity2 extends AppCompatActivity {
-    private static final String TAG = "HouseMActivity"; // 로그를 구분하기 위한 TAG 설정
+    private static final String TAG = "HouseMActivity2"; // 로그를 구분하기 위한 TAG 설정
     private Connect_to_Backend backend;
 
     @Override

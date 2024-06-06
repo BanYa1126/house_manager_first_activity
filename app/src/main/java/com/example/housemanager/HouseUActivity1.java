@@ -227,21 +227,51 @@ public class HouseUActivity1 extends AppCompatActivity {
             String where = String.format("unitId='%s' AND UtilityType='%s'", unitId, utilityType);
             String set = String.format("MeasurementValue=%s", value);
             backend.update_data_from_Backend_with_socket("UtilUsage_data", null, where, null, set);
+
+            // 백엔드 응답 확인
             backend.setEventCallback(new EventCallback() {
                 @Override
                 public void onEventReceived(ReceivedDataEvent event) {
                     Log.d(TAG, "Update response: " + event.getMessage());
-                    runOnUiThread(() -> {
-                        if (event.getMessage().contains("success")) {
-                            Toast.makeText(HouseUActivity1.this, "수정되었습니다.", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(HouseUActivity1.this, "수정에 실패하였습니다.", Toast.LENGTH_SHORT).show();
-                        }
-                        // Refresh activity to show updated data
-                        recreate();
-                    });
+                    try {
+                        // 업데이트 후 다시 데이터를 가져와 비교
+                        backend.read_data_from_Backend_with_socket("UtilUsage_data", null, null, null, null);
+                        backend.setEventCallback(new EventCallback() {
+                            @Override
+                            public void onEventReceived(ReceivedDataEvent event) {
+                                Log.d(TAG, "Verification response: " + event.getMessage());
+                                try {
+                                    String data = event.getMessage();
+                                    JSONArray utilUsageData = new JSONArray(data);
+                                    boolean updateSuccessful = false;
+                                    for (int i = 0; i < utilUsageData.length(); i++) {
+                                        JSONObject jsonObject = utilUsageData.getJSONObject(i);
+                                        if (jsonObject.getInt("UnitId") == unitId &&
+                                                jsonObject.getString("UtilityType").equals(utilityType) &&
+                                                jsonObject.getDouble("MeasurementValue") == Double.parseDouble(newValue)) {
+                                            updateSuccessful = true;
+                                            break;
+                                        }
+                                    }
+                                    if (updateSuccessful) {
+                                        runOnUiThread(() -> Toast.makeText(HouseUActivity1.this, "수정되었습니다.", Toast.LENGTH_SHORT).show());
+                                    } else {
+                                        runOnUiThread(() -> Toast.makeText(HouseUActivity1.this, "수정에 실패하였습니다.", Toast.LENGTH_SHORT).show());
+                                    }
+                                    runOnUiThread(() -> recreate());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                    runOnUiThread(() -> Toast.makeText(HouseUActivity1.this, "수정에 실패하였습니다.", Toast.LENGTH_SHORT).show());
+                                }
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        runOnUiThread(() -> Toast.makeText(HouseUActivity1.this, "수정에 실패하였습니다.", Toast.LENGTH_SHORT).show());
+                    }
                 }
             });
+
         } catch (JSONException | NumberFormatException e) {
             e.printStackTrace();
             Toast.makeText(this, "Invalid input", Toast.LENGTH_SHORT).show();

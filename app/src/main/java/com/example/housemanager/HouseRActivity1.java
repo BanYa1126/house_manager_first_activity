@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -47,7 +49,52 @@ public class HouseRActivity1 extends AppCompatActivity {
         imgMenuIcon.setOnClickListener(menuClickListener);
 
         backend = Connect_to_Backend.getInstance();
-
+        Regbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                backend.read_data_from_Backend_with_socket("Houseinfo_data", null, null, null, null);
+                backend.setEventCallback(new EventCallback() {
+                    @Override
+                    public void onEventReceived(ReceivedDataEvent event) {
+                        Log.d(TAG, "Received house numbers: " + event.getMessage());
+                        try {
+                            JSONArray houseNumbers = new JSONArray(event.getMessage());
+                            int lastNumber = -1;
+                            for (int i = 0; i < houseNumbers.length(); i++) {
+                                int number = houseNumbers.getInt(i);
+                                if (number > lastNumber) {
+                                    lastNumber = number;
+                                }
+                            }
+                            if (lastNumber != -1) {
+                                final int newNumber = lastNumber + 1;
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        text1.setText(String.valueOf(newNumber));
+                                    }
+                                });
+                            } else {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(HouseRActivity1.this, "No house numbers found", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(HouseRActivity1.this, "Failed to parse house numbers", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        });
         Regbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
