@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,22 +40,6 @@ public class HouseMActivity2 extends AppCompatActivity {
         TextView text16 = findViewById(R.id.Mtext16);
         TextView text17 = findViewById(R.id.Mtext17);
 
-        EditText edit1 = findViewById(R.id.Edit_Mtext1);
-        EditText edit2 = findViewById(R.id.Edit_Mtext2);
-        EditText edit3 = findViewById(R.id.Edit_Mtext3);
-        EditText edit4 = findViewById(R.id.Edit_Mtext4);
-        EditText edit5 = findViewById(R.id.Edit_Mtext5);
-        EditText edit6 = findViewById(R.id.Edit_Mtext6);
-        EditText edit7 = findViewById(R.id.Edit_Mtext7);
-        EditText edit8 = findViewById(R.id.Edit_Mtext8);
-        EditText edit9 = findViewById(R.id.Edit_Mtext9);
-        EditText edit10 = findViewById(R.id.Edit_Mtext10);
-        EditText edit11 = findViewById(R.id.Edit_Mtext11);
-        EditText edit12 = findViewById(R.id.Edit_Mtext12);
-        EditText edit13 = findViewById(R.id.Edit_Mtext13);
-        EditText edit14 = findViewById(R.id.Edit_Mtext14);
-        EditText edit15 = findViewById(R.id.Edit_Mtext15);
-
         LinearLayout headerAdmin = findViewById(R.id.headerAdmin);
         ImageView imgMenuIcon = findViewById(R.id.imgMenuIcon);
 
@@ -74,7 +57,6 @@ public class HouseMActivity2 extends AppCompatActivity {
 
         backend = Connect_to_Backend.getInstance();
 
-        // Fetch Contract_data to get unitId
         backend.read_data_from_Backend_with_socket("Contract_data", null, null, null, null);
         backend.setEventCallback(new EventCallback() {
             @Override
@@ -83,21 +65,28 @@ public class HouseMActivity2 extends AppCompatActivity {
                 try {
                     String data = event.getMessage();
                     JSONArray contractInfoArray = new JSONArray(data);
-                    int unitId = -1;
+                    String contractId = null;
                     for (int i = 0; i < contractInfoArray.length(); i++) {
                         JSONObject dataObject = contractInfoArray.getJSONObject(i);
-                        if (dataObject.getInt("ContratId") == unitID) {
-                            unitId = dataObject.getInt("UnitId");
+                        Log.d(TAG, "Contract_data object: " + dataObject.toString());
+                        if (dataObject.getInt("UnitId") == unitID) {
+                            contractId = dataObject.getString("ContractId");
+                            Log.d(TAG, "Match found: UnitId = " + unitID + ", ContractId = " + contractId);
                             break;
                         }
                     }
 
-                    if (unitId != -1) {
-                        int finalUnitId = unitId;
+                    if (contractId != null) {
+                        Log.d(TAG, "ContractId found: " + contractId);
+
+                        // Fetch Bill_data using ContractId
+                        final String finalContractId = contractId; // Make contractId final
                         backend.read_data_from_Backend_with_socket("Bill_data", null, null, null, null);
+                        Log.d(TAG, "Bill_data requested...");
                         backend.setEventCallback(new EventCallback() {
                             @Override
                             public void onEventReceived(ReceivedDataEvent event) {
+                                Log.d(TAG, "Event callback triggered for Bill_data...");
                                 Log.d(TAG, "Received Bill_data: " + event.getMessage());
                                 try {
                                     String billDataString = event.getMessage();
@@ -108,33 +97,51 @@ public class HouseMActivity2 extends AppCompatActivity {
                                             try {
                                                 for (int i = 0; i < billDataArray.length(); i++) {
                                                     JSONObject billDataObject = billDataArray.getJSONObject(i);
-                                                    if (billDataObject.has("UnitId") && billDataObject.getInt("UnitId") == finalUnitId) {
-                                                        // 파싱된 데이터를 TextView에 설정
-                                                        String periodStartDate = billDataObject.optString("PeriodStartDate", "");
-                                                        String periodEndDate = billDataObject.optString("PeriodEndDate", "");
-                                                        String billDate = billDataObject.optString("BillDate", "");
-                                                        int managementFee = billDataObject.optInt("ManagementFee", 0);
-                                                        int unpaidAmount = billDataObject.optInt("UnpaidAmount", 0);
-                                                        int electricityBill = billDataObject.optInt("ElectricityBill", 0);
-                                                        int gasBill = billDataObject.optInt("GasBill", 0);
-                                                        int heatingBill = billDataObject.optInt("HeatingBill", 0);
-                                                        int communicationBill = billDataObject.optInt("CommunicationBill", 0);
-                                                        int waterBill = billDataObject.optInt("WaterBill", 0);
-                                                        int adjustment = parseAdjustment(billDataObject.optString("Adjustment", "0,0"));
-                                                        String paymentDueDate = billDataObject.optString("PaymentDueDate", "");
-                                                        String aiComment = billDataObject.optString("AIComment", "");
+                                                    Log.d(TAG, "Bill_data object: " + billDataObject.toString());
+                                                    if (billDataObject.has("ContractId")) {
+                                                        String billContractId = billDataObject.getString("ContractId");
+                                                        if (billContractId.equals(finalContractId)) {
+                                                            Log.d(TAG, "Bill_data matched for ContractId: " + finalContractId);
+                                                            // 파싱된 데이터를 TextView에 설정
+                                                            String periodStartDate = billDataObject.optString("PeriodStartDate", "");
+                                                            String periodEndDate = billDataObject.optString("PeriodEndDate", "");
+                                                            String billDate = billDataObject.optString("BillDate", "");
+                                                            String paymentDueDate = billDataObject.optString("PaymentDueDate", "");
+                                                            String paymentMethod = billDataObject.optString("PaymentMethod", "");
+                                                            String billRemarks = billDataObject.optString("BillRemarks", "");
+                                                            String lastPaymentDate = billDataObject.optString("LastPaymentDate", "");
+                                                            int rent = billDataObject.optInt("Rent", 0);
+                                                            int managementFee = billDataObject.optInt("ManagementFee", 0);
+                                                            int unpaidAmount = billDataObject.optInt("UnpaidAmount", 0);
+                                                            int electricityBill = billDataObject.optInt("ElectricityBill", 0);
+                                                            int gasBill = billDataObject.optInt("GasBill", 0);
+                                                            int heatingBill = billDataObject.optInt("HeatingBill", 0);
+                                                            int communicationBill = billDataObject.optInt("CommunicationBill", 0);
+                                                            int waterBill = billDataObject.optInt("WaterBill", 0);
+                                                            int adjustment = parseAdjustment(billDataObject.optString("Adjustment", "0,0"));
+                                                            int paidAmount = billDataObject.optInt("PaidAmount", 0);
 
-                                                        text2.setText("Period: " + periodStartDate + " ~ " + periodEndDate);
-                                                        text3.setText("Bill Date: " + billDate);
-                                                        text4.setText("Management Fee: " + managementFee + "원");
-                                                        text5.setText("Unpaid Amount: " + unpaidAmount + "원");
-                                                        text6.setText("Electricity Bill: " + electricityBill + "원");
-                                                        text7.setText("Gas Bill: " + gasBill + "원");
-                                                        text8.setText("Heating Bill: " + heatingBill + "원");
-                                                        text9.setText("Communication Bill: " + communicationBill + "원");
-                                                        text10.setText("Water Bill: " + waterBill + "원");
-                                                        text12.setText("Payment Due Date: " + paymentDueDate);
-                                                        text13.setText("AI Comment: " + aiComment);
+                                                            text2.setText("Period: " + periodStartDate + " ~ " + periodEndDate);
+                                                            text3.setText("Bill Date: " + billDate);
+                                                            text4.setText("Rent: " + rent + "원");
+                                                            text5.setText("Management Fee: " + managementFee + "원");
+                                                            text6.setText("Unpaid Amount: " + unpaidAmount + "원");
+                                                            text7.setText("Adjustment: " + adjustment + "원");
+                                                            text8.setText("Electricity Bill: " + electricityBill + "원");
+                                                            text9.setText("Gas Bill: " + gasBill + "원");
+                                                            text10.setText("Heating Bill: " + heatingBill + "원");
+                                                            text11.setText("Communication Bill: " + communicationBill + "원");
+                                                            text12.setText("Water Bill: " + waterBill + "원");
+                                                            text13.setText("Bill Remarks: " + billRemarks);
+                                                            text14.setText("Payment Method: " + paymentMethod);
+                                                            text15.setText("Payment Due Date: " + paymentDueDate);
+                                                            text16.setText("Last Payment Date: " + lastPaymentDate);
+                                                            text17.setText("Paid Amount: " + paidAmount + "원");
+                                                        } else {
+                                                            Log.d(TAG, "Bill_data ContractId does not match: " + billContractId);
+                                                        }
+                                                    } else {
+                                                        Log.d(TAG, "Bill_data does not contain ContractId");
                                                     }
                                                 }
                                             } catch (JSONException e) {
@@ -150,7 +157,7 @@ public class HouseMActivity2 extends AppCompatActivity {
                             }
                         });
                     } else {
-                        Log.e(TAG, "UnitId not found in Contract_data");
+                        Log.e(TAG, "ContractId not found for UnitId: " + unitID);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -158,6 +165,7 @@ public class HouseMActivity2 extends AppCompatActivity {
                 }
             }
         });
+        Log.d(TAG, "Event callback set...");
     }
 
     private int parseAdjustment(String adjustment) {
