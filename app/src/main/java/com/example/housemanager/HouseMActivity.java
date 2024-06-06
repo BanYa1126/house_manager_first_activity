@@ -3,15 +3,12 @@ package com.example.housemanager;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -85,7 +82,7 @@ public class HouseMActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String UnitID = (String) parent.getItemAtPosition(position);
 
-                Intent intent = new Intent(HouseMActivity.this, HouseMActivity2.class);
+                Intent intent = new Intent(HouseMActivity.this, HouseMActivity1.class);
                 intent.putExtra("UnitId", UnitID);
                 startActivity(intent);
             }

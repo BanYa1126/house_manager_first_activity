@@ -21,7 +21,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HouseMActivity2 extends AppCompatActivity {
+public class HouseMActivity1 extends AppCompatActivity {
     private static final String TAG = "HouseMActivity2"; // 로그를 구분하기 위한 TAG 설정
     private Connect_to_Backend backend;
     private String BillId; // 클래스 변수로 선언하여 전역에서 접근 가능하게 함
@@ -176,25 +176,25 @@ public class HouseMActivity2 extends AppCompatActivity {
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
                                                 Log.e(TAG, "JSON parsing error inside UI thread: " + e.getMessage());
-                                                Toast.makeText(HouseMActivity2.this, "JSON parsing error inside UI thread: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(HouseMActivity1.this, "JSON parsing error inside UI thread: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                     Log.e(TAG, "JSON parsing error: " + e.getMessage());
-                                    Toast.makeText(HouseMActivity2.this, "JSON parsing error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(HouseMActivity1.this, "JSON parsing error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
                     } else {
                         Log.e(TAG, "ContractId not found for UnitId: " + unitID);
-                        Toast.makeText(HouseMActivity2.this, "ContractId not found for UnitId: " + unitID, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(HouseMActivity1.this, "ContractId not found for UnitId: " + unitID, Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.e(TAG, "JSON parsing error: " + e.getMessage());
-                    Toast.makeText(HouseMActivity2.this, "JSON parsing error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HouseMActivity1.this, "JSON parsing error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -223,7 +223,7 @@ public class HouseMActivity2 extends AppCompatActivity {
 
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
-                    Toast.makeText(HouseMActivity2.this, "오류 발생: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HouseMActivity1.this, "오류 발생: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     Log.e(TAG, "Error creating data map: " + e.getMessage());
                     return; // 오류가 발생하면 업데이트를 중단
                 }
@@ -262,12 +262,12 @@ public class HouseMActivity2 extends AppCompatActivity {
                     edit15.setText("");
 
                     // 수정된 값을 다시 확인하기 위해 현재 Activity를 다시 시작
-                    Intent intent = new Intent(HouseMActivity2.this, HouseMActivity2.class);
+                    Intent intent = new Intent(HouseMActivity1.this, HouseMActivity1.class);
                     intent.putExtra("UnitId", UnitID); // UnitID를 인텐트에 추가
                     startActivity(intent);
                     finish(); // 현재 Activity 종료
                 } else {
-                    Toast.makeText(HouseMActivity2.this, "변경된 데이터가 없습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HouseMActivity1.this, "변경된 데이터가 없습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
