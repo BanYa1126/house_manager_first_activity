@@ -42,7 +42,11 @@ public class CustomAdapter3 extends BaseAdapter {
 
         TextView RegNumberText = convertView.findViewById(R.id.HouseNumber);
 
-        RegNumberText.setText(RegNumberText.getText().toString() + RegNum[position]);
+        RegNumberText.setText("세대 번호 : " + RegNum[position]);
         return convertView;
+    }
+    public void updateData(String[] newData) {
+        this.RegNum = newData;
+        notifyDataSetChanged();
     }
 }

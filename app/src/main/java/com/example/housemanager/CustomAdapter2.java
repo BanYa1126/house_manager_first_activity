@@ -41,10 +41,11 @@ public class CustomAdapter2 extends BaseAdapter {
         }
 
         TextView RegNumberText = convertView.findViewById(R.id.RegNum);
+        RegNumberText.setText("호수 정보 : " + RegNum[position]);
 
-        RegNumberText.setText(RegNumberText.getText().toString() + RegNum[position]);
         return convertView;
     }
+
     public void updateData(String[] newData) {
         this.RegNum = newData;
         notifyDataSetChanged();

@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 public class HouseMActivity2 extends AppCompatActivity {
     private static final String TAG = "HouseMActivity"; // 로그를 구분하기 위한 TAG 설정
@@ -33,5 +34,10 @@ public class HouseMActivity2 extends AppCompatActivity {
         // MenuClickListener 설정
         MenuClickListener menuClickListener = new MenuClickListener(this);
         imgMenuIcon.setOnClickListener(menuClickListener);
+
+        TextView text1 = findViewById(R.id.Mtext1);
+
+        String UnitID = getIntent().getStringExtra("UnitId");
+        text1.setText(text1.getText().toString()+ UnitID);
     }
 }

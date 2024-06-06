@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,6 +23,7 @@ public class HouseUActivity extends AppCompatActivity {
 
     private static final String TAG = "HouseUActivity";
     private Connect_to_Backend backend;
+    private boolean isLoading = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,16 +41,14 @@ public class HouseUActivity extends AppCompatActivity {
         imgMenuIcon.setOnClickListener(menuClickListener);
 
         ListView listView = findViewById(R.id.building_listview);
-        ArrayList<String> items = new ArrayList<>(); // Initialize the ArrayList
+        ArrayList<String> items = new ArrayList<>();
 
         // CustomAdapter2 스타일 선언 및 items 적용
         CustomAdapter2 adapter = new CustomAdapter2(this, items.toArray(new String[0]));
-        // listView에 adapter 적용
         listView.setAdapter(adapter);
 
         // Singleton 인스턴스 가져오기
         backend = Connect_to_Backend.getInstance();
-        // EventCallback 등록
         backend.setEventCallback(new EventCallback() {
             @Override
             public void onEventReceived(ReceivedDataEvent event) {
@@ -56,38 +56,30 @@ public class HouseUActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        items.clear(); // Clear the ArrayList to avoid duplicates
-                        adapter.updateData(new String[0]); // Clear the adapter data
+                        try {
+                            JSONArray jsonArray = new JSONArray(event.getMessage());
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                final String roomNumber = jsonObject.getString("RoomNumber");
+                                items.add(roomNumber);
+                            }
+                            adapter.updateData(items.toArray(new String[0]));
+                            Log.d(TAG, "Data updated, size: " + items.size());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.e(TAG, "JSON parsing error: " + e.getMessage());
+                        }
+                        isLoading = false; // 데이터 로드 완료 후 로딩 상태 해제
                     }
                 });
-
-                try {
-                    JSONArray jsonArray = new JSONArray(event.getMessage());
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        final String roomNumber = jsonObject.getString("RoomNumber");
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                items.add(roomNumber);
-                                adapter.updateData(items.toArray(new String[0]));
-                                Log.d(TAG, "Added Room Number: " + roomNumber);
-                            }
-                        });
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Log.e(TAG, "JSON parsing error: " + e.getMessage());
-                }
             }
         });
-        backend.read_data_from_Backend_with_socket("Houseinfo_data", null, null, null, null);
 
-        // ListView 아이템 클릭 리스너 설정
+        loadMoreData(); // 초기 데이터 로드
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // 선택된 항목의 RoomNumber 가져오기
                 String roomNumber = (String) parent.getItemAtPosition(position);
 
                 Intent intent = new Intent(HouseUActivity.this, HouseUActivity1.class);
@@ -95,5 +87,23 @@ public class HouseUActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {}
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if (!isLoading && firstVisibleItem + visibleItemCount >= totalItemCount && totalItemCount > 0) {
+                }
+            }
+        });
+    }
+
+    private void loadMoreData() {
+        if (isLoading) return; // 이미 로딩 중이면 무시
+        isLoading = true;
+
+        backend.read_data_from_Backend_with_socket("Houseinfo_data", null, null, null, null);
     }
 }
