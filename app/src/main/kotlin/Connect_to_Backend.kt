@@ -59,6 +59,12 @@ class Connect_to_Backend {
                 handleReceivedData(args)
             }
 
+            //서버로부터 오류데이터 받기
+            mSocket.on("error_data") { args ->
+                Log.d(TAG, "오류 데이터: " + args[0])
+                handleErrorData(args)
+            }
+
         } catch (e: Exception) {
             Log.e(TAG, "서버 연결 실패: ", e)  // 예외와 함께 로그를 남깁니다.
         }
@@ -96,6 +102,45 @@ class Connect_to_Backend {
         }
     }
 
+    private fun handleErrorData(args: Array<Any>) {
+        if (args.isNotEmpty()) {
+            try {
+                val dataString = args[0].toString() // 데이터를 문자열로 변환
+                Log.d(TAG, "ErrorData: $dataString")
+
+                if (dataString == "Signature has expired") { // JWT 토큰 만료
+                    Log.d(TAG, "try Token refresh with refresh token: $refreshToken")
+                    RetrofitInstance.api.refresh("Bearer $refreshToken").enqueue(object : Callback<RefreshResponse> {
+                        override fun onResponse(call: Call<RefreshResponse>, response: Response<RefreshResponse>) {
+                            if (response.isSuccessful) {
+                                accessToken = response.body()?.access_token
+                                Log.d(TAG, "Token refresh successful, new access token: $accessToken")
+                                // 새로운 토큰을 저장하고 보호된 경로에 접근할 때 사용
+                            } else {
+                                val refreshResult = response.message()
+                                Log.d(TAG, "Token refresh failed: $refreshResult")
+                                //Toast.makeText(context, "Token refresh failed: $refreshResult", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
+                        override fun onFailure(call: Call<RefreshResponse>, t: Throwable) {
+                            val refreshResult = t.message
+                            Log.e(TAG, "Token refresh error: $refreshResult")
+                            //Toast.makeText(context, "Unknown error: $refreshResult", Toast.LENGTH_SHORT).show()
+                        }
+                    })
+                } else {
+                    Log.d(TAG, "Unknown error data: $dataString")
+                    // 추가적인 오류 처리를 여기에 작성
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "데이터 처리 실패: ", e)
+                //Toast.makeText(context, "데이터 처리 실패: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+
     fun login(context: Context, username: String, password: String, callback: LoginCallback) {
         val data = JSONObject()
         data.put("username", username)
@@ -128,6 +173,7 @@ class Connect_to_Backend {
                 Toast.makeText(context, "Unknown error: ${loginResult}", Toast.LENGTH_SHORT).show()
             }
         })
+
     }
 
 

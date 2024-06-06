@@ -26,7 +26,7 @@ interface ApiService {
     @POST("/login")
     fun login(@Body request: LoginRequest): Call<LoginResponse>
 
-    @GET("/protected")
+    @POST("/protected")
     fun getProtected(@Header("Authorization") token: String): Call<ProtectedResponse>
 
     @POST("/refresh")
