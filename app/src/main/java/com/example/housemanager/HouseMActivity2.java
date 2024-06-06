@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +43,24 @@ public class HouseMActivity2 extends AppCompatActivity {
         TextView text15 = findViewById(R.id.Mtext15);
         TextView text16 = findViewById(R.id.Mtext16);
         TextView text17 = findViewById(R.id.Mtext17);
+
+        EditText edit1 = findViewById(R.id.Edit_Mtext1);
+        EditText edit2 = findViewById(R.id.Edit_Mtext2);
+        EditText edit3 = findViewById(R.id.Edit_Mtext3);
+        EditText edit4 = findViewById(R.id.Edit_Mtext4);
+        EditText edit5 = findViewById(R.id.Edit_Mtext5);
+        EditText edit6 = findViewById(R.id.Edit_Mtext6);
+        EditText edit7 = findViewById(R.id.Edit_Mtext7);
+        EditText edit8 = findViewById(R.id.Edit_Mtext8);
+        EditText edit9 = findViewById(R.id.Edit_Mtext9);
+        EditText edit10 = findViewById(R.id.Edit_Mtext10);
+        EditText edit11 = findViewById(R.id.Edit_Mtext11);
+        EditText edit12 = findViewById(R.id.Edit_Mtext12);
+        EditText edit13 = findViewById(R.id.Edit_Mtext13);
+        EditText edit14 = findViewById(R.id.Edit_Mtext14);
+        EditText edit15 = findViewById(R.id.Edit_Mtext15);
+
+        Button btn1 = findViewById(R.id.Modbtn);
 
         LinearLayout headerAdmin = findViewById(R.id.headerAdmin);
         ImageView imgMenuIcon = findViewById(R.id.imgMenuIcon);
@@ -121,22 +143,22 @@ public class HouseMActivity2 extends AppCompatActivity {
                                                             int adjustment = parseAdjustment(billDataObject.optString("Adjustment", "0,0"));
                                                             int paidAmount = billDataObject.optInt("PaidAmount", 0);
 
-                                                            text2.setText("Period: " + periodStartDate + " ~ " + periodEndDate);
-                                                            text3.setText("Bill Date: " + billDate);
-                                                            text4.setText("Rent: " + rent + "원");
-                                                            text5.setText("Management Fee: " + managementFee + "원");
-                                                            text6.setText("Unpaid Amount: " + unpaidAmount + "원");
-                                                            text7.setText("Adjustment: " + adjustment + "원");
-                                                            text8.setText("Electricity Bill: " + electricityBill + "원");
-                                                            text9.setText("Gas Bill: " + gasBill + "원");
-                                                            text10.setText("Heating Bill: " + heatingBill + "원");
-                                                            text11.setText("Communication Bill: " + communicationBill + "원");
-                                                            text12.setText("Water Bill: " + waterBill + "원");
-                                                            text13.setText("Bill Remarks: " + billRemarks);
-                                                            text14.setText("Payment Method: " + paymentMethod);
-                                                            text15.setText("Payment Due Date: " + paymentDueDate);
-                                                            text16.setText("Last Payment Date: " + lastPaymentDate);
-                                                            text17.setText("Paid Amount: " + paidAmount + "원");
+                                                            text2.setText(text2.getText().toString() + periodStartDate + " ~ " + periodEndDate);
+                                                            text3.setText(text3.getText().toString() + billDate);
+                                                            text4.setText(text4.getText().toString() + rent + "원");
+                                                            text5.setText(text5.getText().toString() + managementFee + "원");
+                                                            text6.setText(text6.getText().toString() + unpaidAmount + "원");
+                                                            text7.setText(text7.getText().toString() + adjustment + "원");
+                                                            text8.setText(text8.getText().toString() + electricityBill + "원");
+                                                            text9.setText(text9.getText().toString() + gasBill + "원");
+                                                            text10.setText(text10.getText().toString() + heatingBill + "원");
+                                                            text11.setText(text11.getText().toString() + communicationBill + "원");
+                                                            text12.setText(text12.getText().toString() + waterBill + "원");
+                                                            text13.setText(text13.getText().toString() + billRemarks);
+                                                            text14.setText(text14.getText().toString() + paymentMethod);
+                                                            text15.setText(text15.getText().toString() + paymentDueDate);
+                                                            text16.setText(text16.getText().toString() + lastPaymentDate);
+                                                            text17.setText(text17.getText().toString() + paidAmount + "원");
                                                         } else {
                                                             Log.d(TAG, "Bill_data ContractId does not match: " + billContractId);
                                                         }
@@ -165,7 +187,41 @@ public class HouseMActivity2 extends AppCompatActivity {
                 }
             }
         });
-        Log.d(TAG, "Event callback set...");
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                JSONObject jsonData = new JSONObject();
+                try {
+                    if (!edit1.getText().toString().isEmpty()) jsonData.put("Rent", Integer.parseInt(edit1.getText().toString()));
+                    if (!edit2.getText().toString().isEmpty()) jsonData.put("ManagementFee", Integer.parseInt(edit2.getText().toString()));
+                    if (!edit3.getText().toString().isEmpty()) jsonData.put("UnpaidAmount", Integer.parseInt(edit3.getText().toString()));
+                    if (!edit4.getText().toString().isEmpty()) jsonData.put("Adjustment", Integer.parseInt(edit4.getText().toString()));
+                    if (!edit5.getText().toString().isEmpty()) jsonData.put("ElectricityBill", Integer.parseInt(edit5.getText().toString()));
+                    if (!edit6.getText().toString().isEmpty()) jsonData.put("GasBill", Integer.parseInt(edit6.getText().toString()));
+                    if (!edit7.getText().toString().isEmpty()) jsonData.put("HeatingBill", Integer.parseInt(edit7.getText().toString()));
+                    if (!edit8.getText().toString().isEmpty()) jsonData.put("CommunicationBill", Integer.parseInt(edit8.getText().toString()));
+                    if (!edit9.getText().toString().isEmpty()) jsonData.put("WaterBill", Integer.parseInt(edit9.getText().toString()));
+                    if (!edit10.getText().toString().isEmpty()) jsonData.put("BillRemarks", edit10.getText().toString());
+                    if (!edit11.getText().toString().isEmpty()) jsonData.put("PaymentMethod", edit11.getText().toString());
+                    if (!edit12.getText().toString().isEmpty()) jsonData.put("PaymentDueDate", edit12.getText().toString());
+                    if (!edit13.getText().toString().isEmpty()) jsonData.put("LastPaymentDate", edit13.getText().toString());
+                    if (!edit14.getText().toString().isEmpty()) jsonData.put("PaidAmount", Integer.parseInt(edit14.getText().toString()));
+                    if (!edit15.getText().toString().isEmpty()) jsonData.put("PeriodStartDate", edit15.getText().toString());
+                } catch (JSONException | NumberFormatException e) {
+                    e.printStackTrace();
+                    Toast.makeText(HouseMActivity2.this, "오류 발생: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "Error creating JSON data: " + e.getMessage());
+                    return; // 오류가 발생하면 업데이트를 중단
+                }
+
+                if (jsonData.length() > 0) {
+                    backend.update_data_from_Backend_with_socket("Bill_data", null, null, null, jsonData.toString());
+                    Log.d(TAG, "Sent update data: " + jsonData.toString());
+                } else {
+                    Toast.makeText(HouseMActivity2.this, "변경된 데이터가 없습니다.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private int parseAdjustment(String adjustment) {
