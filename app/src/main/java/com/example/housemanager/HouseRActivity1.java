@@ -35,6 +35,7 @@ public class HouseRActivity1 extends AppCompatActivity {
         EditText text8 = findViewById(R.id.houseR8);
         EditText text9 = findViewById(R.id.houseR9);
         EditText text10 = findViewById(R.id.houseR10);
+
         Button Randombtn = findViewById(R.id.PWRandomButton);
         Button Regbtn = findViewById(R.id.PRButton);
 
@@ -49,16 +50,20 @@ public class HouseRActivity1 extends AppCompatActivity {
         imgMenuIcon.setOnClickListener(menuClickListener);
 
         backend = Connect_to_Backend.getInstance();
-        Regbtn.setOnClickListener(new View.OnClickListener() {
+        Randombtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 backend.read_data_from_Backend_with_socket("Houseinfo_data", null, null, null, null);
                 backend.setEventCallback(new EventCallback() {
                     @Override
                     public void onEventReceived(ReceivedDataEvent event) {
-                        Log.d(TAG, "Received house numbers: " + event.getMessage());
+                        String message = event.getMessage();
+                        Log.d(TAG, "Received house data: " + message);
+
                         try {
-                            JSONArray houseNumbers = new JSONArray(event.getMessage());
+                            // Assuming the message is a JSON object with an array
+                            JSONObject jsonObject = new JSONObject(message);
+                            JSONArray houseNumbers = jsonObject.getJSONArray("houseNumbers");
                             int lastNumber = -1;
                             for (int i = 0; i < houseNumbers.length(); i++) {
                                 int number = houseNumbers.getInt(i);
@@ -83,11 +88,19 @@ public class HouseRActivity1 extends AppCompatActivity {
                                 });
                             }
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            Log.e(TAG, "Failed to parse house data: " + message, e);
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(HouseRActivity1.this, "Failed to parse house numbers", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(HouseRActivity1.this, "Failed to parse house data", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        } catch (Exception e) {
+                            Log.e(TAG, "Unexpected error occurred: " + message, e);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(HouseRActivity1.this, "An unexpected error occurred", Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
