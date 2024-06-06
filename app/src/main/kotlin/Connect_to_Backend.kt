@@ -105,10 +105,10 @@ class Connect_to_Backend {
     private fun handleErrorData(args: Array<Any>) {
         if (args.isNotEmpty()) {
             try {
-                val dataString = args[0].toString() // 데이터를 문자열로 변환
-                Log.d(TAG, "ErrorData: $dataString")
+                val errordata = args[0].toString() // 데이터를 문자열로 변환
+                Log.d(TAG, "ErrorData: $errordata")
 
-                if (dataString == "Signature has expired") { // JWT 토큰 만료
+                if (errordata == "Signature has expired") { // JWT 토큰 만료
                     Log.d(TAG, "try Token refresh with refresh token: $refreshToken")
                     RetrofitInstance.api.refresh("Bearer $refreshToken").enqueue(object : Callback<RefreshResponse> {
                         override fun onResponse(call: Call<RefreshResponse>, response: Response<RefreshResponse>) {
@@ -130,12 +130,11 @@ class Connect_to_Backend {
                         }
                     })
                 } else {
-                    Log.d(TAG, "Unknown error data: $dataString")
-                    // 추가적인 오류 처리를 여기에 작성
+                    Log.d(TAG, "Unknown error data: $errordata")
+                    eventCallback?.onEventReceived(ReceivedDataEvent(errordata))
                 }
             } catch (e: Exception) {
                 Log.e(TAG, "데이터 처리 실패: ", e)
-                //Toast.makeText(context, "데이터 처리 실패: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }
