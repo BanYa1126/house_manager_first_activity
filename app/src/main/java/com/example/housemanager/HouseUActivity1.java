@@ -224,7 +224,9 @@ public class HouseUActivity1 extends AppCompatActivity {
 
             Log.d(TAG, "Updating Utility Data: " + updateObject.toString());
 
-            backend.update_data_from_Backend_with_socket("UtilUsage_data", null, updateObject.toString(), null, null);
+            String where = String.format("unitId='%s' AND UtilityType='%s'", unitId, utilityType);
+            String set = String.format("MeasurementValue=%s", value);
+            backend.update_data_from_Backend_with_socket("UtilUsage_data", null, where, null, set);
             backend.setEventCallback(new EventCallback() {
                 @Override
                 public void onEventReceived(ReceivedDataEvent event) {

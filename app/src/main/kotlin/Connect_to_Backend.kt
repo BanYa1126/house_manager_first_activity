@@ -185,7 +185,7 @@ class Connect_to_Backend {
         data.put("data", messageData)
         data.put("access_token", accessToken)
         mSocket.emit("create_data", data)
-        Log.d(TAG, "Emit data: ${data}")
+        Log.d(TAG, "Emit data create: ${data}")
     }
     fun update_data_from_Backend_with_socket(entity: String, property: String?=null, where: String?=null, option: String?=null, messageData: String?=null){
         val data = JSONObject()
@@ -196,7 +196,7 @@ class Connect_to_Backend {
         data.put("data", messageData)
         data.put("access_token", accessToken)
         mSocket.emit("update_data", data)
-        Log.d(TAG, "Emit data: ${data}")
+        Log.d(TAG, "Emit data update: ${data}")
     }
 
     fun read_data_from_Backend_with_socket(entity: String, property: String?=null, where: String?=null, option: String?=null, messageData: String?=null){
@@ -208,7 +208,7 @@ class Connect_to_Backend {
         data.put("data", messageData)
         data.put("access_token", accessToken)
         mSocket.emit("read_data", data)
-        Log.d(TAG, "Emit data: ${data}")
+        Log.d(TAG, "Emit data read: ${data}")
     }
 
     fun delete_data_from_Backend_with_socket(entity: String, property: String?=null, where: String?=null, option: String?=null, messageData: String?=null){
@@ -220,7 +220,7 @@ class Connect_to_Backend {
         data.put("data", messageData)
         data.put("access_token", accessToken)
         mSocket.emit("delete_data", data)
-        Log.d(TAG, "Emit data: ${data}")
+        Log.d(TAG, "Emit data delete: ${data}")
     }
 
 
