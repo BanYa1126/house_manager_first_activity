@@ -121,7 +121,7 @@ public class HouseUActivity1 extends AppCompatActivity {
 
                                                     switch (utilityType) {
                                                         case "Electricity":
-                                                            text2.setText(text2.getText().toString() + " " + value + " kwh");
+                                                            text2.setText(text2.getText().toString() + " " + value + " kWh");
                                                             break;
                                                         case "Gas":
                                                             text3.setText(text3.getText().toString() + " " + value + " L");
