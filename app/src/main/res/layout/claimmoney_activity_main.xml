@@ -168,12 +168,12 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:layout_marginTop="8dp"
-                    android:text="전기 청구액 : "/>
+                    android:text="수도 청구액 : "/>
                 <EditText
                     android:id="@+id/Edit_Mtext10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="수정할 전기 청구액을 작성해주세요."
+                    android:hint="수정할 수도 청구액을 작성해주세요."
                     android:inputType="text" />
 
                 <TextView

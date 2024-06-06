@@ -3,6 +3,7 @@ package com.example.housemanager;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,7 +25,6 @@ public class HouseMActivity2 extends AppCompatActivity {
     private static final String TAG = "HouseMActivity2"; // 로그를 구분하기 위한 TAG 설정
     private Connect_to_Backend backend;
     private String BillId; // 클래스 변수로 선언하여 전역에서 접근 가능하게 함
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,6 +78,7 @@ public class HouseMActivity2 extends AppCompatActivity {
         imgMenuIcon.setOnClickListener(menuClickListener);
 
         String UnitID = getIntent().getStringExtra("UnitId");
+        text1.setText(text1.getText().toString() + UnitID);
 
         int unitID = Integer.parseInt(UnitID);
 
@@ -175,45 +176,50 @@ public class HouseMActivity2 extends AppCompatActivity {
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
                                                 Log.e(TAG, "JSON parsing error inside UI thread: " + e.getMessage());
+                                                Toast.makeText(HouseMActivity2.this, "JSON parsing error inside UI thread: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                     Log.e(TAG, "JSON parsing error: " + e.getMessage());
+                                    Toast.makeText(HouseMActivity2.this, "JSON parsing error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
                     } else {
                         Log.e(TAG, "ContractId not found for UnitId: " + unitID);
+                        Toast.makeText(HouseMActivity2.this, "ContractId not found for UnitId: " + unitID, Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.e(TAG, "JSON parsing error: " + e.getMessage());
+                    Toast.makeText(HouseMActivity2.this, "JSON parsing error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 HashMap<String, Object> dataMap = new HashMap<>();
 
                 try {
-                    if (!edit1.getText().toString().isEmpty()) dataMap.put("Rent", Integer.parseInt(edit1.getText().toString()));
-                    if (!edit2.getText().toString().isEmpty()) dataMap.put("ManagementFee", Integer.parseInt(edit2.getText().toString()));
-                    if (!edit3.getText().toString().isEmpty()) dataMap.put("UnpaidAmount", Integer.parseInt(edit3.getText().toString()));
-                    if (!edit4.getText().toString().isEmpty()) dataMap.put("Adjustment", edit4.getText().toString());
-                    if (!edit5.getText().toString().isEmpty()) dataMap.put("ElectricityBill", Integer.parseInt(edit5.getText().toString()));
-                    if (!edit6.getText().toString().isEmpty()) dataMap.put("GasBill", Integer.parseInt(edit6.getText().toString()));
-                    if (!edit7.getText().toString().isEmpty()) dataMap.put("HeatingBill", Integer.parseInt(edit7.getText().toString()));
-                    if (!edit8.getText().toString().isEmpty()) dataMap.put("CommunicationBill", Integer.parseInt(edit8.getText().toString()));
-                    if (!edit9.getText().toString().isEmpty()) dataMap.put("WaterBill", Integer.parseInt(edit9.getText().toString()));
-                    if (!edit10.getText().toString().isEmpty()) dataMap.put("BillRemarks", edit10.getText().toString());
-                    if (!edit11.getText().toString().isEmpty()) dataMap.put("PaymentMethod", edit11.getText().toString());
-                    if (!edit12.getText().toString().isEmpty()) dataMap.put("PaymentDueDate", edit12.getText().toString());
-                    if (!edit13.getText().toString().isEmpty()) dataMap.put("LastPaymentDate", edit13.getText().toString());
-                    if (!edit14.getText().toString().isEmpty()) dataMap.put("PaidAmount", Integer.parseInt(edit14.getText().toString()));
-                    if (!edit15.getText().toString().isEmpty()) dataMap.put("PeriodStartDate", edit15.getText().toString());
+                    if (!edit1.getText().toString().isEmpty()) dataMap.put("BillDate", edit1.getText().toString());
+                    if (!edit2.getText().toString().isEmpty()) dataMap.put("Rent", Integer.parseInt(edit2.getText().toString()));
+                    if (!edit3.getText().toString().isEmpty()) dataMap.put("ManagementFee", Integer.parseInt(edit3.getText().toString()));
+                    if (!edit4.getText().toString().isEmpty()) dataMap.put("UnpaidAmount", Integer.parseInt(edit4.getText().toString()));
+                    if (!edit5.getText().toString().isEmpty()) dataMap.put("Adjustment", Integer.parseInt(edit5.getText().toString()));
+                    if (!edit6.getText().toString().isEmpty()) dataMap.put("ElectricityBill", Integer.parseInt(edit6.getText().toString()));
+                    if (!edit7.getText().toString().isEmpty()) dataMap.put("GasBill", Integer.parseInt(edit7.getText().toString()));
+                    if (!edit8.getText().toString().isEmpty()) dataMap.put("HeatingBill", Integer.parseInt(edit8.getText().toString()));
+                    if (!edit9.getText().toString().isEmpty()) dataMap.put("CommunicationBill", Integer.parseInt(edit9.getText().toString()));
+                    if (!edit10.getText().toString().isEmpty()) dataMap.put("WaterBill", Integer.parseInt(edit10.getText().toString()));
+                    if (!edit11.getText().toString().isEmpty()) dataMap.put("BillRemarks", edit11.getText().toString());
+                    if (!edit12.getText().toString().isEmpty()) dataMap.put("PaymentMethod", edit12.getText().toString());
+                    if (!edit13.getText().toString().isEmpty()) dataMap.put("PaymentDueDate", edit13.getText().toString());
+                    if (!edit14.getText().toString().isEmpty()) dataMap.put("LastPaymentDate", edit14.getText().toString());
+                    if (!edit15.getText().toString().isEmpty()) dataMap.put("PaidAmount", Integer.parseInt(edit15.getText().toString()));
 
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
@@ -235,11 +241,31 @@ public class HouseMActivity2 extends AppCompatActivity {
                             set.append(String.format("%s=%s", entry.getKey(), entry.getValue()));
                         }
                     }
-
-
                     String where = String.format("BillId='%s'", BillId);
                     backend.update_data_from_Backend_with_socket("Bill_data", null, where, null, set.toString());
                     Log.d(TAG, "Sent update data: " + dataMap.toString());
+
+                    edit1.setText("");
+                    edit2.setText("");
+                    edit3.setText("");
+                    edit4.setText("");
+                    edit5.setText("");
+                    edit6.setText("");
+                    edit7.setText("");
+                    edit8.setText("");
+                    edit9.setText("");
+                    edit10.setText("");
+                    edit11.setText("");
+                    edit12.setText("");
+                    edit13.setText("");
+                    edit14.setText("");
+                    edit15.setText("");
+
+                    // 수정된 값을 다시 확인하기 위해 현재 Activity를 다시 시작
+                    Intent intent = new Intent(HouseMActivity2.this, HouseMActivity2.class);
+                    intent.putExtra("UnitId", UnitID); // UnitID를 인텐트에 추가
+                    startActivity(intent);
+                    finish(); // 현재 Activity 종료
                 } else {
                     Toast.makeText(HouseMActivity2.this, "변경된 데이터가 없습니다.", Toast.LENGTH_SHORT).show();
                 }
