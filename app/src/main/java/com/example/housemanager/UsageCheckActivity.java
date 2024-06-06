@@ -123,6 +123,7 @@ public class UsageCheckActivity extends AppCompatActivity {
                                                 } catch (JSONException e) {
                                                     e.printStackTrace();
                                                     Log.e(TAG, "JSON parsing error inside UI thread: " + e.getMessage());
+                                                    Toast.makeText(UsageCheckActivity.this, "JSON parsing error: "+ event.getMessage(), Toast.LENGTH_SHORT).show();
                                                 }
                                             }
                                         });
@@ -138,6 +139,7 @@ public class UsageCheckActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.e(TAG, "JSON parsing error: " + e.getMessage());
+                    Toast.makeText(UsageCheckActivity.this, "JSON parsing error: "+ event.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });

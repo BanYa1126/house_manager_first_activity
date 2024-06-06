@@ -111,6 +111,7 @@ public class HouseUActivity1 extends AppCompatActivity {
                                                             utilityValues.put(utilityType, measurementValue);
                                                         } else {
                                                             Log.e(TAG, "Missing keys in JSON object at index " + i);
+                                                            Toast.makeText(HouseUActivity1.this, "값을 찾을 수 없습니다.", Toast.LENGTH_SHORT).show();
                                                         }
                                                     }
                                                 }
@@ -139,6 +140,7 @@ public class HouseUActivity1 extends AppCompatActivity {
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
                                                 Log.e(TAG, "JSON parsing error inside UI thread: " + e.getMessage());
+                                                Toast.makeText(HouseUActivity1.this, "JSON parsing error: "+ event.getMessage(), Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
@@ -150,10 +152,12 @@ public class HouseUActivity1 extends AppCompatActivity {
                         });
                     } else {
                         Log.e(TAG, "RoomNumber not found in Houseinfo_data");
+                        Toast.makeText(HouseUActivity1.this, "호수 정보를 찾을 수 없습니다.", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.e(TAG, "JSON parsing error: " + e.getMessage());
+                    Toast.makeText(HouseUActivity1.this, "JSON parsing error: "+ event.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -209,6 +213,7 @@ public class HouseUActivity1 extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.e(TAG, "JSON parsing error: " + e.getMessage());
+                    Toast.makeText(HouseUActivity1.this, "JSON parsing error: "+ event.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });

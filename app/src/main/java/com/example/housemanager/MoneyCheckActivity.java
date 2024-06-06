@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -121,6 +122,7 @@ public class MoneyCheckActivity extends AppCompatActivity {
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                     Log.e(TAG, "JSON parsing error inside UI thread: " + e.getMessage());
+                                    Toast.makeText(MoneyCheckActivity.this, "JSON parsing error: "+ event.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                                 // 나머지 필드도 동일한 방식으로 설정
                             }
@@ -129,10 +131,12 @@ public class MoneyCheckActivity extends AppCompatActivity {
                     else
                     {
                         Log.d(TAG, "JSON array is empty");
+                        Toast.makeText(MoneyCheckActivity.this, "JSON array is empty: ", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.e(TAG, "JSON parsing error: " + e.getMessage());
+                    Toast.makeText(MoneyCheckActivity.this, "JSON parsing error: "+ event.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
