@@ -124,11 +124,12 @@ public class HouseRActivity1 extends AppCompatActivity {
                     int data6 = Integer.parseInt(text6.getText().toString());
                     int data7 = Integer.parseInt(text7.getText().toString());
                     int data8 = Integer.parseInt(text8.getText().toString());
-                    int data9 = Integer.parseInt(text9.getText().toString()); // Changed to int for consistency
+                    Boolean data9 = Boolean.parseBoolean(text9.getText().toString());
                     String data10 = text10.getText().toString();
 
                     // 백엔드로 데이터 전송
-                    backend.create_data_from_Backend_with_socket("Houseinfo_data", "(UnitId, Location,RoomNumber,RentalArea,HousingType, StandardRent,StandardManagementFee,StandardDeposit,ListingStatus,Remarks)",
+                    backend.create_data_from_Backend_with_socket("Houseinfo_data", "(UnitId, Location,RoomNumber,RentalArea," +
+                                    "HousingType, StandardRent,StandardManagementFee,StandardDeposit,ListingStatus,Remarks)",
                             null, null, String.format("(%s, '%s', %s, %s, '%s', %s, %s, %s, %s, '%s')",
                                     data1, data2, data3, data4, data5, data6, data7, data8, data9, data10));
                     backend.setEventCallback(new EventCallback() {
