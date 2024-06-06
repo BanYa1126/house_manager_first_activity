@@ -77,6 +77,7 @@ public class HouseRActivity1 extends AppCompatActivity {
                                     @Override
                                     public void run() {
                                         text1.setText(String.valueOf(newNumber));
+                                        Toast.makeText(HouseRActivity1.this, "자동생성 완료", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             } else {
@@ -112,41 +113,31 @@ public class HouseRActivity1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // EditText에 입력된 데이터 가져오기
-                String data1 = text1.getText().toString();
+                int data1 = Integer.parseInt(text1.getText().toString());
                 String data2 = text2.getText().toString();
-                String data3 = text3.getText().toString();
-                String data4 = text4.getText().toString();
+                int data3 = Integer.parseInt(text3.getText().toString());
+                Double data4 = Double.parseDouble(text4.getText().toString());
                 String data5 = text5.getText().toString();
-                String data6 = text6.getText().toString();
-                String data7 = text7.getText().toString();
-                String data8 = text8.getText().toString();
-                String data9 = text9.getText().toString();
+                int data6 = Integer.parseInt(text6.getText().toString());
+                int data7 = Integer.parseInt(text7.getText().toString());
+                int data8 = Integer.parseInt(text8.getText().toString());
+                Boolean data9 = Boolean.parseBoolean(text9.getText().toString());
                 String data10 = text10.getText().toString();
 
-                // JSON 객체로 변환
-                JSONObject jsonObject = new JSONObject();
-                try {
-                    jsonObject.put("data1", data1);
-                    jsonObject.put("data2", data2);
-                    jsonObject.put("data3", data3);
-                    jsonObject.put("data4", data4);
-                    jsonObject.put("data5", data5);
-                    jsonObject.put("data6", data6);
-                    jsonObject.put("data7", data7);
-                    jsonObject.put("data8", data8);
-                    jsonObject.put("data9", data9);
-                    jsonObject.put("data10", data10);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
                 // 백엔드로 데이터 전송
-                backend.create_data_from_Backend_with_socket("SaveHouseData", null, null, null, jsonObject.toString());
-
+                backend.create_data_from_Backend_with_socket("Houseinfo_data", "(UnitId, Location,RoomNumber,RentalArea,HousingType, StandardRent,StandardManagementFee,StandardDeposit,ListingStatus,Remarks)",
+                        null, null, String.format("(%s, '%s', %s, %s, '%s', %s, %s, %s, %s, '%s')",
+                data1, data2, data3, data4, data5, data6, data7, data8, data9, data10));
                 backend.setEventCallback(new EventCallback() {
                     @Override
                     public void onEventReceived(ReceivedDataEvent event) {
                         Log.d(TAG, "Data saved: " + event.getMessage());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(HouseRActivity1.this, "등록이 완료 되었습니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 });
             }
