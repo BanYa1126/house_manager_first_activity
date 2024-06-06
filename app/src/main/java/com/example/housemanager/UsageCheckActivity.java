@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -128,6 +129,7 @@ public class UsageCheckActivity extends AppCompatActivity {
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                         Log.e(TAG, "JSON parsing error: " + e.getMessage());
+                                        Toast.makeText(UsageCheckActivity.this, "Server Error: "+ event.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });

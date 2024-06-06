@@ -70,6 +70,7 @@ public class HouseMActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.e(TAG, "JSON parsing error: " + e.getMessage());
+                            Toast.makeText(HouseMActivity.this, "Server Error: "+ event.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                         isLoading = false; // 데이터 로드 완료 후 로딩 상태 해제
                     }

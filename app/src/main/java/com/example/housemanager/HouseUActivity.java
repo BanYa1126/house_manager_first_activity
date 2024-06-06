@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -68,6 +69,7 @@ public class HouseUActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.e(TAG, "JSON parsing error: " + e.getMessage());
+                            Toast.makeText(HouseUActivity.this, "Server Error: "+ event.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                         isLoading = false; // 데이터 로드 완료 후 로딩 상태 해제
                     }
