@@ -111,31 +111,6 @@
                         android:textSize="17sp" />
                 </LinearLayout>
                 <TextView
-                    android:id="@+id/tusage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="통신 사용량 : "
-                    android:textSize="20sp"
-                    android:layout_marginTop="10dp"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-                    <EditText
-                        android:id="@+id/Edit_tusage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:hint="수정할 통신사용량 값을 입력."
-                        android:inputType="numberDecimal" />
-                    <Button
-                        android:id="@+id/tbtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="수정"
-                        android:textSize="17sp" />
-                </LinearLayout>
-                <TextView
                     android:id="@+id/wusage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
