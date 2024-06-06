@@ -52,7 +52,7 @@ public class HouseRActivity1 extends AppCompatActivity {
         backend = Connect_to_Backend.getInstance();
         Randombtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 backend.read_data_from_Backend_with_socket("Houseinfo_data", null, null, null, null);
                 backend.setEventCallback(new EventCallback() {
                     @Override
@@ -61,14 +61,14 @@ public class HouseRActivity1 extends AppCompatActivity {
                         Log.d(TAG, "Received house data: " + message);
 
                         try {
-                            // Assuming the message is a JSON object with an array
-                            JSONObject jsonObject = new JSONObject(message);
-                            JSONArray houseNumbers = jsonObject.getJSONArray("houseNumbers");
+                            // Assuming the message is a JSON array
+                            JSONArray houseArray = new JSONArray(message);
                             int lastNumber = -1;
-                            for (int i = 0; i < houseNumbers.length(); i++) {
-                                int number = houseNumbers.getInt(i);
-                                if (number > lastNumber) {
-                                    lastNumber = number;
+                            for (int i = 0; i < houseArray.length(); i++) {
+                                JSONObject houseObject = houseArray.getJSONObject(i);
+                                int roomNumber = houseObject.getInt("RoomNumber");
+                                if (roomNumber > lastNumber) {
+                                    lastNumber = roomNumber;
                                 }
                             }
                             if (lastNumber != -1) {

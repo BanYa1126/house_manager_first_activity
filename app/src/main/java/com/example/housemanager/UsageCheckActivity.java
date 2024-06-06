@@ -100,7 +100,7 @@ public class UsageCheckActivity extends AppCompatActivity {
 
                                                         switch (utilityType) {
                                                             case "Electricity":
-                                                                text1.setText(text1.getText().toString() + " " + value + " W");
+                                                                text1.setText(text1.getText().toString() + " " + value + " kWh");
                                                                 text2.setText(text2.getText().toString() + " " + Calculation.calculateElectricityBill(value) + "원");
                                                                 break;
                                                             case "Gas":
