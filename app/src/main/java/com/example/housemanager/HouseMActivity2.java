@@ -17,9 +17,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class HouseMActivity2 extends AppCompatActivity {
     private static final String TAG = "HouseMActivity2"; // 로그를 구분하기 위한 TAG 설정
     private Connect_to_Backend backend;
+    private String BillId; // 클래스 변수로 선언하여 전역에서 접근 가능하게 함
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,7 +78,6 @@ public class HouseMActivity2 extends AppCompatActivity {
         imgMenuIcon.setOnClickListener(menuClickListener);
 
         String UnitID = getIntent().getStringExtra("UnitId");
-        text1.setText(text1.getText().toString() + UnitID);
 
         int unitID = Integer.parseInt(UnitID);
 
@@ -123,6 +127,8 @@ public class HouseMActivity2 extends AppCompatActivity {
                                                     if (billDataObject.has("ContractId")) {
                                                         String billContractId = billDataObject.getString("ContractId");
                                                         if (billContractId.equals(finalContractId)) {
+                                                            BillId = billDataObject.optString("BillId", "");
+                                                            Log.d(TAG, "BillId: " + BillId);
                                                             Log.d(TAG, "Bill_data matched for ContractId: " + finalContractId);
                                                             // 파싱된 데이터를 TextView에 설정
                                                             String periodStartDate = billDataObject.optString("PeriodStartDate", "");
@@ -190,33 +196,50 @@ public class HouseMActivity2 extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                JSONObject jsonData = new JSONObject();
+                HashMap<String, Object> dataMap = new HashMap<>();
+
                 try {
-                    if (!edit1.getText().toString().isEmpty()) jsonData.put("Rent", Integer.parseInt(edit1.getText().toString()));
-                    if (!edit2.getText().toString().isEmpty()) jsonData.put("ManagementFee", Integer.parseInt(edit2.getText().toString()));
-                    if (!edit3.getText().toString().isEmpty()) jsonData.put("UnpaidAmount", Integer.parseInt(edit3.getText().toString()));
-                    if (!edit4.getText().toString().isEmpty()) jsonData.put("Adjustment", Integer.parseInt(edit4.getText().toString()));
-                    if (!edit5.getText().toString().isEmpty()) jsonData.put("ElectricityBill", Integer.parseInt(edit5.getText().toString()));
-                    if (!edit6.getText().toString().isEmpty()) jsonData.put("GasBill", Integer.parseInt(edit6.getText().toString()));
-                    if (!edit7.getText().toString().isEmpty()) jsonData.put("HeatingBill", Integer.parseInt(edit7.getText().toString()));
-                    if (!edit8.getText().toString().isEmpty()) jsonData.put("CommunicationBill", Integer.parseInt(edit8.getText().toString()));
-                    if (!edit9.getText().toString().isEmpty()) jsonData.put("WaterBill", Integer.parseInt(edit9.getText().toString()));
-                    if (!edit10.getText().toString().isEmpty()) jsonData.put("BillRemarks", edit10.getText().toString());
-                    if (!edit11.getText().toString().isEmpty()) jsonData.put("PaymentMethod", edit11.getText().toString());
-                    if (!edit12.getText().toString().isEmpty()) jsonData.put("PaymentDueDate", edit12.getText().toString());
-                    if (!edit13.getText().toString().isEmpty()) jsonData.put("LastPaymentDate", edit13.getText().toString());
-                    if (!edit14.getText().toString().isEmpty()) jsonData.put("PaidAmount", Integer.parseInt(edit14.getText().toString()));
-                    if (!edit15.getText().toString().isEmpty()) jsonData.put("PeriodStartDate", edit15.getText().toString());
-                } catch (JSONException | NumberFormatException e) {
+                    if (!edit1.getText().toString().isEmpty()) dataMap.put("Rent", Integer.parseInt(edit1.getText().toString()));
+                    if (!edit2.getText().toString().isEmpty()) dataMap.put("ManagementFee", Integer.parseInt(edit2.getText().toString()));
+                    if (!edit3.getText().toString().isEmpty()) dataMap.put("UnpaidAmount", Integer.parseInt(edit3.getText().toString()));
+                    if (!edit4.getText().toString().isEmpty()) dataMap.put("Adjustment", edit4.getText().toString());
+                    if (!edit5.getText().toString().isEmpty()) dataMap.put("ElectricityBill", Integer.parseInt(edit5.getText().toString()));
+                    if (!edit6.getText().toString().isEmpty()) dataMap.put("GasBill", Integer.parseInt(edit6.getText().toString()));
+                    if (!edit7.getText().toString().isEmpty()) dataMap.put("HeatingBill", Integer.parseInt(edit7.getText().toString()));
+                    if (!edit8.getText().toString().isEmpty()) dataMap.put("CommunicationBill", Integer.parseInt(edit8.getText().toString()));
+                    if (!edit9.getText().toString().isEmpty()) dataMap.put("WaterBill", Integer.parseInt(edit9.getText().toString()));
+                    if (!edit10.getText().toString().isEmpty()) dataMap.put("BillRemarks", edit10.getText().toString());
+                    if (!edit11.getText().toString().isEmpty()) dataMap.put("PaymentMethod", edit11.getText().toString());
+                    if (!edit12.getText().toString().isEmpty()) dataMap.put("PaymentDueDate", edit12.getText().toString());
+                    if (!edit13.getText().toString().isEmpty()) dataMap.put("LastPaymentDate", edit13.getText().toString());
+                    if (!edit14.getText().toString().isEmpty()) dataMap.put("PaidAmount", Integer.parseInt(edit14.getText().toString()));
+                    if (!edit15.getText().toString().isEmpty()) dataMap.put("PeriodStartDate", edit15.getText().toString());
+
+                } catch (NumberFormatException e) {
                     e.printStackTrace();
                     Toast.makeText(HouseMActivity2.this, "오류 발생: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.e(TAG, "Error creating JSON data: " + e.getMessage());
+                    Log.e(TAG, "Error creating data map: " + e.getMessage());
                     return; // 오류가 발생하면 업데이트를 중단
                 }
 
-                if (jsonData.length() > 0) {
-                    backend.update_data_from_Backend_with_socket("Bill_data", null, null, null, jsonData.toString());
-                    Log.d(TAG, "Sent update data: " + jsonData.toString());
+                if (!dataMap.isEmpty()) {
+                    // 데이터 전송
+                    StringBuilder set = new StringBuilder();
+                    for (Map.Entry<String, Object> entry : dataMap.entrySet()) {
+                        if (set.length() > 0) {
+                            set.append(", ");
+                        }
+                        if (entry.getValue() instanceof String) {
+                            set.append(String.format("%s='%s'", entry.getKey(), entry.getValue()));
+                        } else {
+                            set.append(String.format("%s=%s", entry.getKey(), entry.getValue()));
+                        }
+                    }
+
+
+                    String where = String.format("BillId='%s'", BillId);
+                    backend.update_data_from_Backend_with_socket("Bill_data", null, where, null, set.toString());
+                    Log.d(TAG, "Sent update data: " + dataMap.toString());
                 } else {
                     Toast.makeText(HouseMActivity2.this, "변경된 데이터가 없습니다.", Toast.LENGTH_SHORT).show();
                 }
