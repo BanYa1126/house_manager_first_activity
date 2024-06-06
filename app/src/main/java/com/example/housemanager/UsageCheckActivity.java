@@ -48,10 +48,15 @@ public class UsageCheckActivity extends AppCompatActivity {
         backend = Connect_to_Backend.getInstance();
 
         // 두 개의 데이터를 동시에 요청
-        backend.read_data_from_Backend_with_socket("Houseinfo_data", null,null, "personal", null);
-        backend.read_data_from_Backend_with_socket("UtilUsage_data", null, null,"personal", null);
+        backend.read_data_from_Backend_with_socket("Houseinfo_data", null, null, "personal", null);
+        backend.read_data_from_Backend_with_socket("UtilUsage_data", null, null, "personal", null);
 
         backend.setEventCallback(new EventCallback() {
+            private boolean isHouseInfoProcessed = false;
+            private boolean isUtilUsageProcessed = false;
+            private double rentalArea = 0;
+            private JSONArray utilUsageData = null;
+
             @Override
             public void onEventReceived(ReceivedDataEvent event) {
                 Log.d(TAG, "Received data: " + event.getMessage());
@@ -61,77 +66,119 @@ public class UsageCheckActivity extends AppCompatActivity {
                         JSONArray houseInfoArray = new JSONArray(data);
                         if (houseInfoArray.length() > 0) {
                             JSONObject dataObject = houseInfoArray.getJSONObject(0);
-                            final double rentalArea = dataObject.optDouble("RentalArea", 0); // 기본값 0
+                            rentalArea = dataObject.optDouble("RentalArea", 0); // 기본값 0
+                            isHouseInfoProcessed = true;
                             Log.d(TAG, "RentalArea: " + rentalArea);
 
-                            // UtilUsage_data 요청 후 처리
-                            backend.read_data_from_Backend_with_socket("UtilUsage_data",null, null, "personal", null);
-                            backend.setEventCallback(new EventCallback() {
-                                @Override
-                                public void onEventReceived(ReceivedDataEvent event) {
-                                    Log.d(TAG, "Received UtilUsage_data: " + event.getMessage());
+                            // UtilUsage_data가 이미 수신된 경우 UI 업데이트 수행
+                            if (isUtilUsageProcessed) {
+                                runOnUiThread(() -> {
                                     try {
-                                        String utilData = event.getMessage();
-                                        JSONArray utilUsageData = new JSONArray(utilData);
+                                        HashMap<String, Double> utilityValues = new HashMap<>();
+                                        for (int i = 0; i < utilUsageData.length(); i++) {
+                                            JSONObject jsonObject = utilUsageData.getJSONObject(i);
+                                            if (jsonObject.has("UtilityType") && jsonObject.has("MeasurementValue")) {
+                                                String utilityType = jsonObject.getString("UtilityType");
+                                                double measurementValue = jsonObject.getDouble("MeasurementValue");
+                                                Log.d(TAG, "UtilityType: " + utilityType + ", MeasurementValue: " + measurementValue);
 
-                                        runOnUiThread(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                try {
-                                                    HashMap<String, Double> utilityValues = new HashMap<>();
-                                                    for (int i = 0; i < utilUsageData.length(); i++) {
-                                                        JSONObject jsonObject = utilUsageData.getJSONObject(i);
-                                                        if (jsonObject.has("UtilityType") && jsonObject.has("MeasurementValue")) {
-                                                            String utilityType = jsonObject.getString("UtilityType");
-                                                            double measurementValue = jsonObject.getDouble("MeasurementValue");
-                                                            Log.d(TAG, "UtilityType: " + utilityType + ", MeasurementValue: " + measurementValue);
-
-                                                            if (!utilityValues.containsKey(utilityType)) {
-                                                                utilityValues.put(utilityType, measurementValue);
-                                                            }
-                                                        } else {
-                                                            Log.e(TAG, "Missing keys in JSON object at index " + i);
-                                                        }
-                                                    }
-
-                                                    for (String utilityType : utilityValues.keySet()) {
-                                                        double value = utilityValues.get(utilityType);
-                                                        Log.d(TAG, "Processing UtilityType: " + utilityType + ", Value: " + value);
-
-                                                        switch (utilityType) {
-                                                            case "Electricity":
-                                                                text1.setText(text1.getText().toString() + " " + value + " kWh");
-                                                                text2.setText(text2.getText().toString() + " " + Calculation.calculateElectricityBill(value) + "원");
-                                                                break;
-                                                            case "Gas":
-                                                                text3.setText(text3.getText().toString() + " " + value + " L");
-                                                                text4.setText(text4.getText().toString() + " " + Calculation.calculateGasBill(value) + "원");
-                                                                break;
-                                                            case "Heating":
-                                                                text5.setText(text5.getText().toString() + " " + (value*1000)  + " Mcal");
-                                                                text6.setText(text6.getText().toString() + " " + Calculation.calculateHeatingBill(rentalArea, value) + "원");
-                                                                break;
-                                                            case "Water":
-                                                                text8.setText(text8.getText().toString() + " " + value + " L");
-                                                                text9.setText(text9.getText().toString() + " " + Calculation.calculateWaterBill(value) + "원");
-                                                                break;
-                                                            default:
-                                                                break;
-                                                        }
-                                                    }
-                                                    text7.setText(text7.getText().toString() + " " + 20000 + "원");
-                                                } catch (JSONException e) {
-                                                    e.printStackTrace();
-                                                    Log.e(TAG, "JSON parsing error inside UI thread: " + e.getMessage());
-                                                    Toast.makeText(UsageCheckActivity.this, "JSON parsing error: "+ event.getMessage(), Toast.LENGTH_SHORT).show();
+                                                if (!utilityValues.containsKey(utilityType)) {
+                                                    utilityValues.put(utilityType, measurementValue);
                                                 }
+                                            } else {
+                                                Log.e(TAG, "Missing keys in JSON object at index " + i);
                                             }
-                                        });
+                                        }
+
+                                        for (String utilityType : utilityValues.keySet()) {
+                                            double value = utilityValues.get(utilityType);
+                                            Log.d(TAG, "Processing UtilityType: " + utilityType + ", Value: " + value);
+
+                                            switch (utilityType) {
+                                                case "Electricity":
+                                                    text1.setText(text1.getText().toString() + " " + value + " kWh");
+                                                    text2.setText(text2.getText().toString() + " " + Calculation.calculateElectricityBill(value) + "원");
+                                                    break;
+                                                case "Gas":
+                                                    text3.setText(text3.getText().toString() + " " + value + " L");
+                                                    text4.setText(text4.getText().toString() + " " + Calculation.calculateGasBill(value) + "원");
+                                                    break;
+                                                case "Heating":
+                                                    text5.setText(text5.getText().toString() + " " + (value * 1000) + " Mcal");
+                                                    text6.setText(text6.getText().toString() + " " + Calculation.calculateHeatingBill(rentalArea, value) + "원");
+                                                    break;
+                                                case "Water":
+                                                    text8.setText(text8.getText().toString() + " " + value + " L");
+                                                    text9.setText(text9.getText().toString() + " " + Calculation.calculateWaterBill(value) + "원");
+                                                    break;
+                                                default:
+                                                    break;
+                                            }
+                                        }
+                                        text7.setText(text7.getText().toString() + " " + 20000 + "원");
                                     } catch (JSONException e) {
                                         e.printStackTrace();
-                                        Log.e(TAG, "JSON parsing error: " + e.getMessage());
-                                        Toast.makeText(UsageCheckActivity.this, "Server Error: "+ event.getMessage(), Toast.LENGTH_SHORT).show();
+                                        Log.e(TAG, "JSON parsing error inside UI thread: " + e.getMessage());
+                                        Toast.makeText(UsageCheckActivity.this, "JSON parsing error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
+                                });
+                            }
+                        }
+                    } else if (data.contains("UtilityType")) { // UtilUsage_data 확인
+                        utilUsageData = new JSONArray(data);
+                        isUtilUsageProcessed = true;
+                        Log.d(TAG, "Received UtilUsage_data: " + event.getMessage());
+
+                        // Houseinfo_data가 이미 수신된 경우 UI 업데이트 수행
+                        if (isHouseInfoProcessed) {
+                            runOnUiThread(() -> {
+                                try {
+                                    HashMap<String, Double> utilityValues = new HashMap<>();
+                                    for (int i = 0; i < utilUsageData.length(); i++) {
+                                        JSONObject jsonObject = utilUsageData.getJSONObject(i);
+                                        if (jsonObject.has("UtilityType") && jsonObject.has("MeasurementValue")) {
+                                            String utilityType = jsonObject.getString("UtilityType");
+                                            double measurementValue = jsonObject.getDouble("MeasurementValue");
+                                            Log.d(TAG, "UtilityType: " + utilityType + ", MeasurementValue: " + measurementValue);
+
+                                            if (!utilityValues.containsKey(utilityType)) {
+                                                utilityValues.put(utilityType, measurementValue);
+                                            }
+                                        } else {
+                                            Log.e(TAG, "Missing keys in JSON object at index " + i);
+                                        }
+                                    }
+
+                                    for (String utilityType : utilityValues.keySet()) {
+                                        double value = utilityValues.get(utilityType);
+                                        Log.d(TAG, "Processing UtilityType: " + utilityType + ", Value: " + value);
+
+                                        switch (utilityType) {
+                                            case "Electricity":
+                                                text1.setText(text1.getText().toString() + " " + value + " kWh");
+                                                text2.setText(text2.getText().toString() + " " + Calculation.calculateElectricityBill(value) + "원");
+                                                break;
+                                            case "Gas":
+                                                text3.setText(text3.getText().toString() + " " + value + " L");
+                                                text4.setText(text4.getText().toString() + " " + Calculation.calculateGasBill(value) + "원");
+                                                break;
+                                            case "Heating":
+                                                text5.setText(text5.getText().toString() + " " + (value * 1000) + " Mcal");
+                                                text6.setText(text6.getText().toString() + " " + Calculation.calculateHeatingBill(rentalArea, value) + "원");
+                                                break;
+                                            case "Water":
+                                                text8.setText(text8.getText().toString() + " " + value + " L");
+                                                text9.setText(text9.getText().toString() + " " + Calculation.calculateWaterBill(value) + "원");
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                    text7.setText(text7.getText().toString() + " " + 20000 + "원");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                    Log.e(TAG, "JSON parsing error inside UI thread: " + e.getMessage());
+                                    Toast.makeText(UsageCheckActivity.this, "JSON parsing error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
@@ -139,7 +186,7 @@ public class UsageCheckActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.e(TAG, "JSON parsing error: " + e.getMessage());
-                    Toast.makeText(UsageCheckActivity.this, "JSON parsing error: "+ event.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UsageCheckActivity.this, "JSON parsing error: " + event.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
