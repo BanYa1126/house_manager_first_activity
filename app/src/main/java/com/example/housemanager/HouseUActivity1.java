@@ -2,6 +2,7 @@ package com.example.housemanager;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.WindowDecorActionBar;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 public class HouseUActivity1 extends AppCompatActivity {
     @Override
@@ -29,5 +31,10 @@ public class HouseUActivity1 extends AppCompatActivity {
         // MenuClickListener 설정
         MenuClickListener menuClickListener = new MenuClickListener(this);
         imgMenuIcon.setOnClickListener(menuClickListener);
+
+        TextView text1 = findViewById(R.id.House_Ho);
+
+        String roomNumber = getIntent().getStringExtra("RoomNumber");
+        text1.setText(text1.getText().toString()+ roomNumber);
     }
 }
